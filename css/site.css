@@ -14,3 +14,7 @@
 .tag {
   color: #001f4d !important; /* koyu lacivert */
 }
+/* Sağ kutuyu biraz aşağı kaydırma */
+.contact-info {
+  margin-top: 5.8rem; 
+}
