@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Haluk Şakir Ekinci</title>
+  <link rel="icon" href="assets/favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','Segoe UI','Roboto'] },
+          colors: { brand: { DEFAULT: '#6D5DF6', dark: '#8E7CFF' } },
+          boxShadow: { glow: '0 10px 30px rgba(109,93,246,0.35)' },
+          backgroundImage: { 'radial': 'radial-gradient(1200px 600px at 10% 10%, rgba(109,93,246,0.15), transparent 60%), radial-gradient(900px 500px at 90% 20%, rgba(14,165,233,0.15), transparent 60%)' }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans relative">
+  <div class="absolute inset-0 -z-10 bg-radial"></div>
+  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-gray-950/60 border-b border-gray-200/60 dark:border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <img src="assets/avatar.jpg" class="w-10 h-10 rounded-2xl ring-1 ring-gray-200/70 dark:ring-white/10" alt="Avatar">
+        <div>
+          <p class="font-semibold leading-tight group-hover:opacity-80 transition">Haluk Şakir Ekinci</p>
+          <p class="text-xs text-gray-500 dark:text-gray-400 -mt-0.5">ERP Sistemleri & Yazılım</p>
+        </div>
+      </a>
+      <nav class="flex items-center gap-2">
+        <a href="index.html" class="navlink" data-i18n="nav.home">Ana Sayfa</a>
+        <a href="projects.html" class="navlink" data-i18n="nav.projects">Projeler</a>
+        <a href="blog.html" class="navlink" data-i18n="nav.blog">Blog</a>
+        <a href="contact.html" class="navlink primary" data-i18n="nav.contact">İletişim</a>
+        <div class="h-6 w-px bg-gray-200 dark:bg-white/10 mx-1"></div>
+        <button id="themeToggle" class="iconbtn" title="Tema"><span id="themeIcon">🌗</span></button>
+        <button id="langToggle" class="iconbtn" title="Dil">🇹🇷/🇬🇧</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pt-12">
+    <h1 class="text-3xl font-bold mb-2">Blog</h1>
+    <p class="text-gray-600 dark:text-gray-300 mb-8" id="blogDesc">Yazılarımı burada paylaşıyorum.</p>
+
+    <div id="blog-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </main>
+
+  <footer class="border-t border-gray-200/60 dark:border-white/10 mt-20">
+    <div class="max-w-6xl mx-auto px-4 py-10 text-sm text-gray-600 dark:text-gray-400 flex flex-col md:flex-row items-center justify-between gap-3">
+      <p>© <span id="year"></span> Haluk Şakir Ekinci</p>
+      <div class="flex items-center gap-3">
+        <a href="mailto:hseekinci@gmail.com" class="hover:underline">hseekinci@gmail.com</a>
+        <span>•</span>
+        <a href="https://www.linkedin.com/in/haluksakirekinci" target="_blank" class="hover:underline">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com/Hse38" target="_blank" class="hover:underline">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/blog.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+:root{--ring:rgba(17,24,39,.08)}.navlink{padding:.5rem .75rem;border-radius:.75rem} .navlink.primary{background:#111827;color:#fff}.dark .navlink.primary{background:#1f2937}
+.btn-primary{padding:.75rem 1.25rem;border-radius:1rem;background:#111827;color:#fff;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.dark .btn-primary{background:#1f2937}
+.btn-outline{padding:.75rem 1.25rem;border-radius:1rem;border:1px solid var(--ring);background:rgba(255,255,255,.8)}
+.iconbtn{padding:.4rem .6rem;border-radius:.75rem;border:1px solid var(--ring);background:rgba(255,255,255,.7)}
+.input{width:100%;padding:.6rem 1rem;border-radius:.75rem;outline:none;border:1px solid rgba(148,163,184,.4);background:rgba(255,255,255,.8)}
+.dark .input{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+.shadow-glow{box-shadow:0 10px 30px rgba(109,93,246,.25)}
+.bg-radial{background-image:radial-gradient(1200px 600px at 10% 10%, rgba(109,93,246,.15), transparent 60%), radial-gradient(900px 500px at 90% 20%, rgba(14,165,233,.15), transparent 60%)}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.animate-fade{animation:fade .6s ease both .05s}.animate-rise{animation:fade .6s ease both .15s}
+.prose p{margin:.5rem 0}
+.line-clamp-3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tag {
+  color: #001f4d !important; /* koyu lacivert */
+}
