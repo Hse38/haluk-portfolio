@@ -18,3 +18,23 @@
 .contact-info {
   margin-top: 5.8rem; 
 }
+/* --- FOOTER GÖRÜNÜRLÜK FİX (MOBİL + MASAÜSTÜ) --- */
+html, body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+  padding-bottom: 4rem; /* footer boşluğu */
+}
+
+/* footer her zaman görünür olacak */
+footer {
+  margin-top: auto;
+  position: relative;
+  z-index: 50;
+  background-color: rgba(17, 24, 39, 0.95);
+  color: #fff;
+}
