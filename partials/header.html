@@ -1,7 +1,7 @@
 <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-white/40 dark:bg-gray-950/40 border-b border-gray-200/60 dark:border-white/10 shadow-sm">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
     <!-- Sol Taraf -->
-      <a href="/" class="flex items-center gap-3 group">
+    <a href="/" class="flex items-center gap-3 group">
       <img src="assets/avatar.jpg" class="w-10 h-10 rounded-2xl ring-1 ring-gray-200/70 dark:ring-white/10" alt="Avatar">
       <div>
         <p class="font-semibold leading-tight group-hover:opacity-80 transition">Haluk Şakir Ekinci</p>
@@ -9,22 +9,31 @@
       </div>
     </a>
 
-    <!-- Sağ Taraf -->
-    <div class="flex items-center gap-3">
-      <!-- 🌐 Mini Flag Switch -->
-      <button id="langSwitch" class="relative w-16 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-between px-2 cursor-pointer transition-all">
-        <span id="flagTr" class="text-lg transition-transform duration-300">🇹🇷</span>
-        <span id="flagEn" class="text-lg transition-transform duration-300 opacity-50">🇬🇧</span>
-        <span id="flagSlider" class="absolute w-6 h-6 bg-white dark:bg-gray-900 rounded-full shadow-md left-1 transition-all duration-300"></span>
-      </button>
+    <!-- Sağ Taraf (Menü + Butonlar) -->
+    <div class="flex items-center gap-4 md:gap-5">
+      <!-- 🌐 Masaüstü Menü -->
+      <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-gray-700 dark:text-gray-200">
+        <a href="/" class="hover:text-blue-500" data-i18n="nav.home">ANA SAYFA</a>
+        <a href="/projects" class="hover:text-blue-500" data-i18n="nav.projects">PROJELER</a>
+        <a href="/blog" class="hover:text-blue-500" data-i18n="nav.blog">BLOG</a>
+        <a href="/contact" class="hover:text-blue-500" data-i18n="nav.contact">İLETİŞİM</a>
+      </nav>
 
-      <!-- 🌗 Tema -->
-      <button id="themeToggle" class="text-2xl hover:scale-110 transition">🌗</button>
+      <!-- 🌐 Mini Flag Switch + Tema + Menü -->
+      <div class="flex items-center gap-2 md:gap-3">
+        <button id="langSwitch" class="relative w-16 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-between px-2 cursor-pointer transition-all">
+          <span id="flagTr" class="text-lg transition-transform duration-300">🇹🇷</span>
+          <span id="flagEn" class="text-lg transition-transform duration-300 opacity-50">🇬🇧</span>
+          <span id="flagSlider" class="absolute w-6 h-6 bg-white dark:bg-gray-900 rounded-full shadow-md left-1 transition-all duration-300"></span>
+        </button>
 
-      <!-- 🍔 Menü -->
-      <button id="menuBtn" class="md:hidden text-gray-800 dark:text-white text-3xl focus:outline-none">
-        ☰
-      </button>
+        <button id="themeToggle" class="text-2xl hover:scale-110 transition">🌗</button>
+
+        <!-- 🍔 Menü -->
+        <button id="menuBtn" class="md:hidden text-gray-800 dark:text-white text-3xl focus:outline-none">
+          ☰
+        </button>
+      </div>
     </div>
   </div>
 </header>
@@ -32,10 +41,10 @@
 <!-- 📱 Fullscreen Menü -->
 <div id="fullscreenMenu"
   class="hidden fixed inset-0 bg-black/95 text-white flex flex-col justify-center items-center text-center gap-6 text-2xl font-semibold transition-all duration-700 ease-out z-40 opacity-0">
-<a href="/" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.home">ANA SAYFA</a>
-<a href="/projects" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.projects">PROJELER</a>
-<a href="/blog" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.blog">BLOG</a>
-<a href="/contact" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.contact">İLETİŞİM</a>
+  <a href="/" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.home">ANA SAYFA</a>
+  <a href="/projects" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.projects">PROJELER</a>
+  <a href="/blog" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.blog">BLOG</a>
+  <a href="/contact" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.contact">İLETİŞİM</a>
 </div>
 
 <script>
@@ -84,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("haluk:lang", lang);
     updateLangUI();
 
-    // i18n çevirisini yenile
     if (typeof applyI18n === "function") applyI18n();
   });
 });
