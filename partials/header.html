@@ -1,0 +1,91 @@
+<header class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-white/40 dark:bg-gray-950/40 border-b border-gray-200/60 dark:border-white/10 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- Sol Taraf -->
+      <a href="/" class="flex items-center gap-3 group">
+      <img src="assets/avatar.jpg" class="w-10 h-10 rounded-2xl ring-1 ring-gray-200/70 dark:ring-white/10" alt="Avatar">
+      <div>
+        <p class="font-semibold leading-tight group-hover:opacity-80 transition">Haluk Şakir Ekinci</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400 -mt-0.5" data-i18n="site.subtitle">ERP Sistemleri & Yazılım</p>
+      </div>
+    </a>
+
+    <!-- Sağ Taraf -->
+    <div class="flex items-center gap-3">
+      <!-- 🌐 Mini Flag Switch -->
+      <button id="langSwitch" class="relative w-16 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-between px-2 cursor-pointer transition-all">
+        <span id="flagTr" class="text-lg transition-transform duration-300">🇹🇷</span>
+        <span id="flagEn" class="text-lg transition-transform duration-300 opacity-50">🇬🇧</span>
+        <span id="flagSlider" class="absolute w-6 h-6 bg-white dark:bg-gray-900 rounded-full shadow-md left-1 transition-all duration-300"></span>
+      </button>
+
+      <!-- 🌗 Tema -->
+      <button id="themeToggle" class="text-2xl hover:scale-110 transition">🌗</button>
+
+      <!-- 🍔 Menü -->
+      <button id="menuBtn" class="md:hidden text-gray-800 dark:text-white text-3xl focus:outline-none">
+        ☰
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- 📱 Fullscreen Menü -->
+<div id="fullscreenMenu"
+  class="hidden fixed inset-0 bg-black/95 text-white flex flex-col justify-center items-center text-center gap-6 text-2xl font-semibold transition-all duration-700 ease-out z-40 opacity-0">
+<a href="/" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.home">ANA SAYFA</a>
+<a href="/projects" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.projects">PROJELER</a>
+<a href="/blog" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.blog">BLOG</a>
+<a href="/contact" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400" data-i18n="nav.contact">İLETİŞİM</a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("menuBtn");
+  const menu = document.getElementById("fullscreenMenu");
+  const flagSwitch = document.getElementById("langSwitch");
+  const flagTr = document.getElementById("flagTr");
+  const flagEn = document.getElementById("flagEn");
+  const slider = document.getElementById("flagSlider");
+
+  let isMenuOpen = false;
+  let lang = localStorage.getItem("haluk:lang") || "tr";
+
+  // 🍔 Menü kontrolü
+  menuBtn.addEventListener("click", () => {
+    isMenuOpen = !isMenuOpen;
+    if (isMenuOpen) {
+      menu.classList.remove("hidden");
+      setTimeout(() => menu.classList.add("active"), 10);
+      menuBtn.innerHTML = "×";
+    } else {
+      menu.classList.remove("active");
+      setTimeout(() => menu.classList.add("hidden"), 600);
+      menuBtn.innerHTML = "☰";
+    }
+  });
+
+  // 🌐 Başlangıç dili ayarla
+  const updateLangUI = () => {
+    if (lang === "tr") {
+      flagTr.style.opacity = "1";
+      flagEn.style.opacity = "0.5";
+      slider.style.left = "1px";
+    } else {
+      flagTr.style.opacity = "0.5";
+      flagEn.style.opacity = "1";
+      slider.style.left = "calc(100% - 26px)";
+    }
+  };
+  updateLangUI();
+
+  // 🌐 Dil değiştir
+  flagSwitch.addEventListener("click", () => {
+    lang = lang === "tr" ? "en" : "tr";
+    localStorage.setItem("haluk:lang", lang);
+    updateLangUI();
+
+    // i18n çevirisini yenile
+    if (typeof applyI18n === "function") applyI18n();
+  });
+});
+</script>

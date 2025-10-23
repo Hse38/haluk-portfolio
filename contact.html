@@ -23,90 +23,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css">
-  <style>
-    #menuBtn {
-      transition: transform 0.3s ease;  
-    }
-    #menuBtn:hover {
-      transform: scale(1.2);
-    }
-    #fullscreenMenu {
-      opacity: 0;
-      transform: scale(0.95);
-      transition: all 0.4s ease-in-out;
-    }
-    #fullscreenMenu.active {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    #fullscreenMenu.active .menu-item {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .menu-item:nth-child(1) { transition-delay: 0.1s; }
-    .menu-item:nth-child(2) { transition-delay: 0.2s; }
-    .menu-item:nth-child(3) { transition-delay: 0.3s; }
-    .menu-item:nth-child(4) { transition-delay: 0.4s; }
-  </style>
-
-  <style>
-      #fullscreenMenu {
-        opacity: 0;
-        transform: scale(0.95);
-        transition: all 0.4s ease-in-out;
-      }
-      #fullscreenMenu.active {
-        opacity: 1;
-        transform: scale(1);
-      }
-    </style>
 
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans relative">
   <div class="absolute inset-0 -z-10 bg-radial"></div>
 
   <!-- HEADER -->
-  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-gray-950/60 border-b border-gray-200/60 dark:border-white/10">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3 group">
-        <img src="assets/avatar.jpg" class="w-10 h-10 rounded-2xl ring-1 ring-gray-200/70 dark:ring-white/10" alt="Avatar">
-        <div>
-          <p class="font-semibold leading-tight group-hover:opacity-80 transition">Haluk Şakir Ekinci</p>
-          <p class="text-xs text-gray-500 dark:text-gray-400 -mt-0.5">ERP Sistemleri & Yazılım</p>
-        </div>
-        
-      </a>
-      <!-- Mobil Hamburger Buton -->
-        <button id="menuBtn" class="md:hidden fixed top-5 right-5 z-50 text-gray-800 dark:text-white text-3xl focus:outline-none">
-          ☰
-        </button>
-        
-      <nav class="hidden md:flex items-center gap-2">
-        <a href="index.html" class="navlink" data-i18n="nav.home">Ana Sayfa</a>
-        <a href="projects.html" class="navlink" data-i18n="nav.projects">Projeler</a>
-        <a href="blog.html" class="navlink" data-i18n="nav.blog">Blog</a>
-        <a href="contact.html" class="navlink primary" data-i18n="nav.contact">İletişim</a>
-        <div class="h-6 w-px bg-gray-200 dark:bg-white/10 mx-1"></div>
-      </nav>
-    </div>
-  </header>
-  <!-- Fullscreen Hamburger Menü -->
-  <div id="fullscreenMenu" class="hidden fixed inset-0 bg-black/95 text-white flex flex-col justify-center items-center text-center gap-6 text-2xl font-semibold transition-all duration-700 ease-out z-40 opacity-0">
-    <a href="index.html" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400">ANA SAYFA</a>
-    <a href="projects.html" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400">PROJELER</a>
-    <a href="blog.html" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400">BLOG</a>
-    <a href="contact.html" class="menu-item opacity-0 translate-y-8 transition-all duration-500 hover:text-blue-400">İLETİŞİM</a>
-    <div class="flex items-center gap-4 mt-6">
-      <button id="themeToggle" class="text-3xl hover:scale-110 transition" title="Tema">
-        🌗
-      </button>
-      <button id="langToggle" class="text-xl border border-white/20 rounded-xl px-4 py-2 hover:bg-white/10 transition" title="Dil">
-        🇹🇷 / 🇬🇧
-      </button>
-    </div>
-  </div>
+  <div id="header-placeholder"></div>
 
   <!-- MAIN -->
   <main class="max-w-6xl mx-auto px-4 pt-12">
@@ -167,26 +90,12 @@
       </div>
     </div>
   </main>
+  <div id="footer-placeholder"></div>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-gray-200/60 dark:border-white/10 mt-20">
-    <div class="max-w-6xl mx-auto px-4 py-10 text-sm text-gray-600 dark:text-gray-400 flex flex-col md:flex-row items-center justify-between gap-3">
-      <p>© <span id="year"></span> Haluk Şakir Ekinci — Tüm hakları saklıdır.</p>
-      <div class="flex items-center gap-3">
-        <a href="mailto:hseekinci@gmail.com" class="hover:underline">hseekinci@gmail.com</a>
-        <span>•</span>
-        <a href="https://www.linkedin.com/in/haluksakirekinci" target="_blank" class="hover:underline">LinkedIn</a>
-        <span>•</span>
-        <a href="https://github.com/Hse38" target="_blank" class="hover:underline">GitHub</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- SCRIPTS -->
   <script src="js/app.js"></script>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+  <script src="js/include.js"></script>
 
+  <script>
     // Form gönderim kontrolü
     const form = document.querySelector('#contactForm');
     form.addEventListener('submit', async (e) => {
@@ -211,25 +120,5 @@
       }
     });
   </script>
-    <script>
-      const menuBtn = document.getElementById('menuBtn');
-      const menu = document.getElementById('fullscreenMenu');
-      let isOpen = false;
-
-      menuBtn.addEventListener('click', () => {
-        isOpen = !isOpen;
-
-        if (isOpen) {
-          menu.classList.remove('hidden');
-          setTimeout(() => menu.classList.add('active'), 10);
-          menuBtn.innerHTML = '×'; // Menü açıkken X göster
-        } else {
-          menu.classList.remove('active');
-          setTimeout(() => menu.classList.add('hidden'), 600);
-          menuBtn.innerHTML = '☰'; // Menü kapanınca geri dön
-        }
-      });
-    </script>
-
 </body>
 </html>

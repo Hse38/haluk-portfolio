@@ -12,3 +12,30 @@ function renderProjects(list){ const grid=$('#project-grid'); if(!grid)return; g
 function renderFeatured(list){ const wrap=$('#featured-projects'); if(!wrap) return; wrap.innerHTML=list.slice(0,3).map(cardTemplate).join(''); }
 async function loadProjects(){ try{ const res=await fetch('data/projects.json?_='+Date.now()); const data=await res.json(); renderProjects(data.projects); renderFeatured(data.projects);} catch(e){ console.error('Projeler yüklenemedi', e);} }
 loadLang(); loadProjects();
+document.addEventListener("DOMContentLoaded", () => {
+  const langBtn = document.getElementById("langToggle");
+  const flag = document.getElementById("flag");
+  const langLabel = document.getElementById("langLabel");
+
+  if (!langBtn) return; // header henüz yüklenmediyse bekle
+
+  let currentLang = localStorage.getItem("haluk:lang") || "tr";
+  updateLangUI();
+
+  langBtn.addEventListener("click", () => {
+    currentLang = currentLang === "tr" ? "en" : "tr";
+    localStorage.setItem("haluk:lang", currentLang);
+    updateLangUI();
+    if (typeof applyI18n === "function") applyI18n();
+  });
+
+  function updateLangUI() {
+    if (currentLang === "tr") {
+      flag.textContent = "🇹🇷";
+      langLabel.textContent = " / EN";
+    } else {
+      flag.textContent = "🇬🇧";
+      langLabel.textContent = " / TR";
+    }
+  }
+});
