@@ -41,29 +41,36 @@
       "repo": ""
     },
     {
-      "title": "T3 Ticketing — Biletleme",
+      "title": "Bilet Talep ve Yönetim Otomasyon Sistemi",
       "year": "2025",
-      "description": "Kurumsal bilet talep, onay ve raporlama; OTP akışlarının sadeleştirilmesi ve güvenli işlem süreçleri.",
+      "description": "Kurum içi bilet taleplerinin, onay ve satın alma süreçlerinin dijitalleştirildiği entegre bir sistemdir. OTP doğrulama akışı sadeleştirilmiş, işlem güvenliği artırılmıştır. Yetkili kullanıcılar talepleri oluşturabilir, yöneticiler onaylayabilir ve raporlar tek panel üzerinden takip edilebilir.",
       "tags": [
         "Django",
         "Tailwind",
-        "PostgreSQL"
+        "PostgreSQL",
+        "Automation",
+        "Workflow",
+        "OTP"
       ],
       "image": "assets/ticket.png",
       "link": "",
       "repo": ""
     },
     {
-      "title": "Depo Pazar — İç Pazar",
+      "title": "E-ticaret Altyapılı Siteler",
       "year": "2024",
-      "description": "Depo fazlası ürünlerin kurum içi sirkülasyonu için pazar yeri ve basit ERP entegrasyonları.",
+      "description": "Kurumsal markalar ve iç operasyonlar için özelleştirilebilir e-ticaret sistemleri geliştirildi. Ürün yönetimi, sipariş takibi, ödeme altyapısı, depo senkronizasyonu ve kullanıcı yönetimi tek panelde birleştirildi. ERP entegrasyonlarıyla satış ve stok süreçleri tam otomatik hale getirildi.",
       "tags": [
-        "ERP",
-        "Integration"
-      ],
-      "image": "assets/besmadde.png",
-      "link": "",
-      "repo": ""
+        "Django",
+        "React",
+        "Tailwind",
+        "PostgreSQL",
+        "API",
+        "Stripe"
+  ],
+  "image": "assets/besmadde.png",
+  "link": "",
+  "repo": ""
     }
   ]
 }

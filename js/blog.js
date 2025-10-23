@@ -62,7 +62,7 @@ function renderList(items) {
       p.id
     )}" class="group bg-white/80 dark:bg-white/5 rounded-3xl overflow-hidden ring-1 ring-gray-200/70 dark:ring-white/10 hover:shadow-glow transition block">
       <div class="aspect-[16/10] bg-white/40 dark:bg-white/5 overflow-hidden">
-        <img src="${p.image || "assets/placeholder.png"}" alt="${
+        <img src="${p.image || "assets/burs.jpeg"}" alt="${
         p.title
       }" class="w-full h-full object-cover group-hover:scale-[1.02] transition">
       </div>
@@ -126,7 +126,14 @@ async function renderDetail() {
     img.classList.remove("hidden");
   }
 
-  _q("#postContent").innerHTML = post.content;
+  // 🩵 BURASI GÜNCELLENDİ: Paragrafları düzgün biçimlendirme
+  if (Array.isArray(post.content)) {
+    _q("#postContent").innerHTML = post.content
+      .map((p) => (p.trim() ? `<p>${p}</p>` : "<br>"))
+      .join("");
+  } else {
+    _q("#postContent").innerHTML = `<p>${post.content}</p>`;
+  }
 
   const likes = getLikes();
   const key = "post_" + post.id;

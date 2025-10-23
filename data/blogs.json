@@ -1,24 +1,62 @@
 {
-  "blogs": [
-    {
-      "id": 1,
-      "title": "ERP Süreçlerinde Verimlilik: Sahadan Öğrendiklerim",
-      "date": "2025-10-01",
-      "excerpt": "T3 Vakfı ekosisteminde ERP entegrasyonu yaparken edindiğim pratikler ve verimlilik ipuçları...",
-      "image": "assets/placeholder.png",
-      "likes": 4,
-      "dislikes": 0,
-      "content": "<p>ERP entegrasyonları sadece yazılım değil, süreç ve insan işidir. Kullanıcı eğitimleri, veri doğruluğu, basit iş akışları ve ölçülebilir KPI'lar en kritik bileşenlerdir.</p><ul><li>Modüler ilerleyin, küçük zaferler biriktirin</li><li>Eğitim ve dökümantasyon standardı kurun</li><li>Raporlamayı ilk günden tasarlayın</li></ul>"
-    },
-    {
+  "blogs": 
+    [
+  {
+    "id": 1,
+    "title": "Bir Burs Programı, Bir Hayat Yolculuğu 🎯",
+    "date": "2025-10-18",
+    "cover": "assets/blog/burs.jpeg",
+    "content": [
+      "🎯 Bir burs programı, bazen bir hayat yolculuğuna dönüşür.",
+      "",
+      "Türkiye Teknoloji Takımı Vakfı’nda bugün bu büyük ekibin bir parçası olarak görev alıyorum.",
+      "Ancak bu hikâyem bir çalışan olarak değil,",
+      "Özdemir Bayraktar Milli Teknoloji Burs Programı’nın Eğitmen Mentor bursiyeri olarak başladı.",
+      "",
+      "Bu burs benim için yalnızca bir maddi destek değildi.",
+      "Asıl kazanç; liderlik, mentörlük ve paylaşma kültürünü öğrenmekti.",
+      "Deneyap Teknoloji Atölyelerinde gençlere eğitim verirken, aslında ben de onlardan öğreniyordum.",
+      "Birlikte üretmek, birlikte gelişmek… işte Milli Teknoloji Hamlesi’nin özü tam olarak bu.",
+      "",
+      "O gün bursiyerdim, sonra stajyer oldum…",
+      "Ve şimdi aynı ekosistemin içinde, bu kez üretim tarafında katkı sunmaya devam ediyorum.",
+      "Bu yolculuk bana gösterdi ki, inançla ve emekle yola çıkan herkesin hayali gerçeğe dönüşebilir.",
+      "",
+      "Bu burs; sadece bir destek değil,",
+      "bir vizyonun, bir misyonun, bir ekosistemin parçası olma fırsatı.",
+      "Burada kazandığın her deneyim, dokunduğun her öğrenci,",
+      "ülkemizin teknolojik geleceğine atılan küçük ama güçlü bir adım.",
+      "",
+      "Eğer sen de geleceğin teknolojilerini üretmek,",
+      "ülkenin potansiyeline katkı sunmak istiyorsan,",
+      "bu yolculuk tam sana göre. 🌍",
+      "",
+      "📎 Başvuru linki: https://mth.tc/Burs2026",
+      "📘 Detaylı bilgi: https://bursiyer.t3vakfi.org/",
+      "",
+      "hashtag#MilliTeknolojiHamlesi hashtag#ÖzdemirBayraktarBursProgramı hashtag#T3Vakfı hashtag#Deneyap hashtag#Liderlik hashtag#Mentorluk #İlham"
+   ],
+   "likes": 0,
+    "dislikes": 0
+  },
+  {
       "id": 2,
-      "title": "QR Tabanlı Vale Otomasyonu: 3 Dakikada Hazır",
-      "date": "2025-09-15",
-      "excerpt": "Restoran müşterisi ayrılmadan 3 dakika önce aracı hazır etme fikrinin teknik tasarımı...",
-      "image": "assets/placeholder.png",
-      "likes": 9,
-      "dislikes": 1,
-      "content": "<p>QR ile talep oluşturma, valenin ekranında gerçek zamanlı gözüken bir kuyruğa düşer. Zorunlu tahmini teslim zamanı (3-4-10 dk) ile operasyon akışı netleşir.</p>"
+      "title": "Tekrarlanan İşleri Otomatikleştirmek 🧠",
+      "date": "2025-10-01",
+      "image": "assets/appscript.jpeg",
+      "excerpt": "Google App Script tabanlı mini otomasyonlarla kurum içi süreçleri sadeleştirmek ve verimliliği artırmak üzerine.",
+      "content": [
+        "🧠 Tekrarlanan işleri otomatikleştirmek mümkünken neden manuel yapalım?",
+        "Son dönemde iş süreçlerimizi daha verimli hale getirmek için Google App Script tabanlı mini otomasyonlar geliştiriyorum. Her biri farklı bir ihtiyaca dokunuyor:",
+        "📋 İzin taleplerinden, 🎫 Biletleme sistemine, 📤 Planlanmış bilgilendirme maillerinin otomatik gönderimine, 📈 Günlük raporlamalara kadar birçok operasyonel süreç artık çok daha sade.",
+        "💡 Amaç basit: insanın iş yükünü azaltmak değil, emeğini doğru yere yönlendirmek. Teknoloji karmaşıklaştırmak için değil, sadeleştirmek için var.",
+        "🔧 Kullandığım başlıca teknolojiler: Google App Script • Sheets API • Gmail API • HTML • CSS • Python",
+        "🚀 App Script’in en büyük avantajı: Ayrı bir sunucu ya da hosting hizmeti almadan, doğrudan Google altyapısında çalışan web uygulamaları geliştirebilmek. İzinleri doğru şekilde tanımladığınızda, birkaç dakika içinde kurum içi sistemlerinizi herkesin erişebileceği biçimde yayına alabiliyorsunuz.",
+        "⚠️ Dikkat edilmesi gereken tarafı: App Script, Google ekosistemiyle sınırlı. Büyük veri veya kullanıcı yönetimi gerektiğinde ölçeklenebilirlik sınırlı kalabiliyor. Yine de küçük ve orta ölçekli operasyonlar için hız, maliyet ve erişim açısından benzersiz bir çözüm.",
+        "hashtag#automation hashtag#appsScript hashtag#verimlilik hashtag#dijitaldönüşüm hashtag#googleworkspace hashtag#productivity"
+      ],
+      "likes": 0,
+      "dislikes": 0
     }
   ]
 }

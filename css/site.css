@@ -1,49 +1,104 @@
-:root{--ring:rgba(17,24,39,.08)}.navlink{padding:.5rem .75rem;border-radius:.75rem} .navlink.primary{background:#111827;color:#fff}.dark .navlink.primary{background:#1f2937}
-.btn-primary{padding:.75rem 1.25rem;border-radius:1rem;background:#111827;color:#fff;box-shadow:0 1px 1px rgba(0,0,0,.06)}
-.dark .btn-primary{background:#1f2937}
-.btn-outline{padding:.75rem 1.25rem;border-radius:1rem;border:1px solid var(--ring);background:rgba(255,255,255,.8)}
-.iconbtn{padding:.4rem .6rem;border-radius:.75rem;border:1px solid var(--ring);background:rgba(255,255,255,.7)}
-.input{width:100%;padding:.6rem 1rem;border-radius:.75rem;outline:none;border:1px solid rgba(148,163,184,.4);background:rgba(255,255,255,.8)}
-.dark .input{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
-.shadow-glow{box-shadow:0 10px 30px rgba(109,93,246,.25)}
-.bg-radial{background-image:radial-gradient(1200px 600px at 10% 10%, rgba(109,93,246,.15), transparent 60%), radial-gradient(900px 500px at 90% 20%, rgba(14,165,233,.15), transparent 60%)}
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.animate-fade{animation:fade .6s ease both .05s}.animate-rise{animation:fade .6s ease both .15s}
-.prose p{margin:.5rem 0}
-.line-clamp-3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+:root {
+  --ring: rgba(17, 24, 39, 0.08);
+}
+
+/* --- NAV & BUTONLAR --- */
+.navlink { padding: .5rem .75rem; border-radius: .75rem; }
+.navlink.primary { background: #111827; color: #fff; }
+.dark .navlink.primary { background: #1f2937; }
+
+.btn-primary {
+  padding: .75rem 1.25rem;
+  border-radius: 1rem;
+  background: #111827;
+  color: #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,.06);
+}
+.dark .btn-primary { background: #1f2937; }
+
+.btn-outline {
+  padding: .75rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid var(--ring);
+  background: rgba(255,255,255,.8);
+}
+
+.iconbtn {
+  padding: .4rem .6rem;
+  border-radius: .75rem;
+  border: 1px solid var(--ring);
+  background: rgba(255,255,255,.7);
+}
+
+/* --- INPUT --- */
+.input {
+  width: 100%;
+  padding: .6rem 1rem;
+  border-radius: .75rem;
+  outline: none;
+  border: 1px solid rgba(148,163,184,.4);
+  background: rgba(255,255,255,.8);
+}
+.dark .input {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.12);
+}
+
+/* --- GENEL GÖRSEL TEMALAR --- */
+.shadow-glow { box-shadow: 0 10px 30px rgba(109,93,246,.25); }
+.bg-radial {
+  background-image:
+    radial-gradient(1200px 600px at 10% 10%, rgba(109,93,246,.15), transparent 60%),
+    radial-gradient(900px 500px at 90% 20%, rgba(14,165,233,.15), transparent 60%);
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade { animation: fade .6s ease both .05s; }
+.animate-rise { animation: fade .6s ease both .15s; }
+
+.prose p { margin: .5rem 0; }
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- TAG TASARIMI --- */
 .tag {
-  color: #001f4d !important; /* koyu lacivert */
+  color: #001f4d !important;
+  white-space: nowrap;
 }
-/* Sağ kutuyu biraz aşağı kaydırma */
-.contact-info {
-  margin-top: 5.8rem; 
-}
-/* --- FOOTER GÖRÜNÜRLÜK FİX (MOBİL + MASAÜSTÜ) --- */
+
+/* --- İLETİŞİM SAYFASI DÜZENİ --- */
+.contact-info { margin-top: 5.8rem; }
+
+/* --- FOOTER SABİTLEME --- */
 html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-
 main {
   flex-grow: 1;
   padding-bottom: 4rem; /* footer boşluğu */
 }
-
-/* footer her zaman görünür olacak */
 footer {
   margin-top: auto;
   position: relative;
   z-index: 50;
-  background-color: rgba(17, 24, 39, 0.95);
+  background-color: rgba(17,24,39,0.95);
   color: #fff;
 }
 
-/* --- GERÇEK FULLSCREEN MENÜ FİX --- */
+/* --- FULLSCREEN MENÜ --- */
 #fullscreenMenu {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(0,0,0,0.95);
   color: white;
   display: flex;
   flex-direction: column;
@@ -57,36 +112,83 @@ footer {
   visibility: hidden;
   transition: opacity 0.4s ease, visibility 0.4s ease;
   z-index: 9999;
+  top: 64px; /* header yüksekliği kadar boşluk bırak */
 }
-
-#fullscreenMenu.active {
-  opacity: 1;
-  visibility: visible;
-}
-
+#fullscreenMenu.active { opacity: 1; visibility: visible; }
 #fullscreenMenu a {
   color: white;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.4s ease;
 }
-
 #fullscreenMenu.active a {
   opacity: 1;
   transform: translateY(0);
 }
+#fullscreenMenu a:hover { color: #60a5fa; }
 
-#fullscreenMenu a:hover {
-  color: #60a5fa; /* hover efekti (mavi ton) */
-}
-
-/* --- HEADER HER ZAMAN ÜSTTE KALSIN --- */
+/* --- HEADER HER ZAMAN ÜSTTE --- */
 header {
   position: relative;
-  z-index: 10001 !important; /* fullscreen menüden de üstte */
+  z-index: 10001 !important;
 }
 
-/* Menü sadece içerikleri kaplasın, header'ı değil */
-#fullscreenMenu {
-  top: 64px; /* header yüksekliği kadar aşağıdan başlasın */
+/* --- PROJE KARTI TAG DÜZENİ --- */
+.project-card,
+.group { overflow: visible !important; }
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: auto;
+  min-height: 100%;
+}
+
+.project-card .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.project-card .tag {
+  white-space: nowrap;
+  background: rgba(255,255,255,0.9);
+  color: #1d4ed8;
+  padding: 0.25rem 0.6rem;
+  border-radius: 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1;
+}
+/* --- PROJE ETİKETLERİ KUTU TAŞMA DÜZELTME --- */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  overflow: hidden; /* kart sınırını koru */
+}
+
+.project-card .tags {
+  display: flex;
+  flex-wrap: wrap; /* çok önemli */
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  width: 100%; /* kart genişliği kadar uzasın */
+  overflow-wrap: break-word; /* çok uzun kelimeler kırılır */
+  word-break: break-word;
+}
+
+.project-card .tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1d4ed8;
+  padding: 0.25rem 0.6rem;
+  border-radius: 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: normal; /* alt satıra geçebilsin */
+  max-width: 100%; /* kutudan taşmaz */
 }

@@ -7,7 +7,48 @@ function applyI18n(){ $$('[data-i18n]').forEach(el=>{const k=el.getAttribute('da
 async function loadLang(){ try{ const res=await fetch('data/lang.json?_='+Date.now()); dict=await res.json(); const saved=localStorage.getItem(STORAGE.lang)||'tr'; LANG=saved; applyI18n(); }catch(e){ console.error('Dil dosyası yüklenemedi', e); } }
 function toggleLang(){ LANG = (LANG==='tr') ? 'en' : 'tr'; localStorage.setItem(STORAGE.lang, LANG); applyI18n(); }
 $('#langToggle')?.addEventListener('click', toggleLang);
-function cardTemplate(p){ return `<article class="group bg-white/80 dark:bg-white/5 rounded-3xl overflow-hidden ring-1 ring-gray-200/70 dark:ring-white/10 hover:shadow-glow transition"><div class="aspect-[16/10] bg-white/40 dark:bg-white/5 overflow-hidden"><img src="${p.image||'assets/placeholder.png'}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-[1.02] transition"></div><div class="p-5"><div class="flex items-center justify-between gap-3"><h3 class="font-semibold text-lg">${p.title}</h3>${p.year?`<span class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-white/10">${p.year}</span>`:''}</div><p class="mt-2 text-sm text-gray-600 dark:text-gray-300 line-clamp-3">${p.description||''}</p><div class="mt-4 flex items-center gap-2">${(p.tags||[]).map(t=>`<span class="text-xs px-2 py-1 rounded-full bg-white text-blue-900">${t}</span>`).join('')}</div><div class="mt-4 flex items-center gap-3">${p.link?`<a href="${p.link}" target="_blank" class="text-sm underline">${t('projects.detail')||'Detay'}</a>`:''}${p.repo?`<a href="${p.repo}" target="_blank" class="text-sm underline">${t('projects.code')||'Kod'}</a>`:''}</div></div></article>`;}
+function cardTemplate(p) {
+  return `
+  <article class="group bg-white/80 dark:bg-white/5 rounded-3xl overflow-hidden ring-1 ring-gray-200/70 dark:ring-white/10 hover:shadow-glow transition h-full flex flex-col">
+    <div class="aspect-[16/10] bg-white/40 dark:bg-white/5 overflow-hidden">
+      <img src="${p.image || 'assets/placeholder.png'}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-[1.02] transition">
+    </div>
+
+    <div class="p-5 flex flex-col flex-1 min-h-0">
+      <div class="flex items-center justify-between gap-3">
+        <h3 class="font-semibold text-lg">${p.title}</h3>
+        ${p.year ? `<span class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-white/10">${p.year}</span>` : ''}
+      </div>
+
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-300 line-clamp-3 flex-1">${p.description || ''}</p>
+
+      <!-- 🧩 ETİKETLER (Wrap destekli) -->
+      <div class="mt-4 flex flex-wrap gap-2 w-full">
+        ${(p.tags || [])
+          .map(
+            (t) => `
+          <span class="inline-block max-w-full px-2 py-1 rounded-full bg-white/90 text-blue-900 text-xs font-medium leading-none whitespace-normal break-words">
+            ${t}
+          </span>`
+          )
+          .join('')}
+      </div>
+
+      <div class="mt-4 flex items-center gap-3">
+        ${
+          p.link
+            ? `<a href="${p.link}" target="_blank" class="text-sm underline">${t('projects.detail') || 'Detay'}</a>`
+            : ''
+        }
+        ${
+          p.repo
+            ? `<a href="${p.repo}" target="_blank" class="text-sm underline">${t('projects.code') || 'Kod'}</a>`
+            : ''
+        }
+      </div>
+    </div>
+  </article>`;
+}
 function renderProjects(list){ const grid=$('#project-grid'); if(!grid)return; grid.innerHTML=list.map(cardTemplate).join(''); const s=$('#search'); if(s){ s.addEventListener('input', ()=>{ const q=s.value.toLowerCase().trim(); const f=list.filter(p=>(p.title||'').toLowerCase().includes(q)||(p.description||'').toLowerCase().includes(q)||(p.tags||[]).join(' ').toLowerCase().includes(q)); grid.innerHTML=f.map(cardTemplate).join(''); }); }}
 function renderFeatured(list){ const wrap=$('#featured-projects'); if(!wrap) return; wrap.innerHTML=list.slice(0,3).map(cardTemplate).join(''); }
 async function loadProjects(){ try{ const res=await fetch('data/projects.json?_='+Date.now()); const data=await res.json(); renderProjects(data.projects); renderFeatured(data.projects);} catch(e){ console.error('Projeler yüklenemedi', e);} }
