@@ -29,6 +29,8 @@
 
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans relative">
+  <!-- === SCROLL PROGRESS BAR === -->
+  <div id="progressBar" class="fixed top-0 left-0 h-1 z-50 transition-all duration-200" style="width:0%; background:linear-gradient(90deg,#6D5DF6,#3B82F6);"></div>
   <!-- 🔹 Arka plan sabit div -->
   <div class="absolute inset-0 w-full h-full bg-radial pointer-events-none"></div>
 
@@ -39,10 +41,14 @@
       <div class="animate-fade">
         <h1 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
           <span data-i18n="hero.hello">Merhaba, ben Haluk.</span><br>
+          <!-- === ANİMASYONLU SELAMLAMA + TEKNOLOJİ DÖNGÜSÜ === -->
+          <p id="intro" class="text-gray-400 mt-4 text-lg font-medium"></p>
+          <p class="text-gray-400 mt-1">Kullandığım teknolojiler: 
+            <span id="tech" class="text-brand font-semibold inline-block animate-fade-in"></span>
+          </p>
           <span class="text-gray-600 dark:text-gray-300" data-i18n="hero.tag">ERP Sistemleri üzerine çalışıyor & Yazılım çözümleri geliştiriyorum.</span>
         </h1>
-        <p class="mt-5 text-gray-600 dark:text-gray-300 max-w-2xl" data-i18n="hero.desc">Firmaların ekosistemlerinde uçtan uca sistemler kuruyor; süreçleri dijitalleştiriyorum.</p>
-        <div class="mt-6 flex gap-3">
+        <div class="mt-6 flex items-center gap-4"></div>          
           <a href="projects.html" class="btn-primary" data-i18n="cta.projects">Projelerim</a>
           <a href="contact.html" class="btn-outline" data-i18n="cta.contact">İletişime Geç</a>
         </div>
@@ -73,6 +79,19 @@
       <div class="prose prose-gray dark:prose-invert max-w-none" id="aboutText"></div>
     </section>
   </main>
+  <!-- === BENİMLE TANIŞ MODAL === -->
+  <div class="text-center mt-12">
+    <button id="aboutBtn" class="btn-primary">Benimle Tanış</button>
+  </div>
+
+  <div id="aboutModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 transition-opacity duration-500">
+    <div class="modal-box bg-white dark:bg-gray-900 p-6 rounded-2xl w-80 text-center transform scale-95 opacity-0 transition-all duration-300">
+      <h3 class="font-semibold mb-2 text-lg">Haluk Şakir Ekinci</h3>
+      <p class="text-sm text-gray-500">ERP Sistem Sorumlusu & Yazılım Geliştirici</p>
+      <p class="text-xs text-gray-400 mt-2">T3 Vakfı | Dijital dönüşüm & süreç optimizasyonu</p>
+      <button id="closeModal" class="btn-outline mt-4">Kapat</button>
+    </div>
+  </div>
   <div id="footer-placeholder"></div>
   <script src="js/app.js"></script>
   <script src="js/include.js"></script>

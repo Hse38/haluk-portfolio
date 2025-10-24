@@ -80,3 +80,67 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+// === Typewriter Selamlama ===
+const messages = [
+  "Günaydın ☀️ Ben Haluk, ERP sistemleri geliştiriyorum.",
+  "İyi günler 👨‍💻 Dijital dönüşüm süreçlerini kodluyorum.",
+  "İyi akşamlar 🌙 Süreçleri sadeleştiriyor, zamanı kazandırıyorum."
+];
+const intro = document.getElementById("intro");
+if (intro) {
+  const cursor = document.createElement("span");
+  cursor.classList.add("cursor");
+  intro.appendChild(cursor);
+
+  let msgIndex = 0, charIndex = 0;
+  function type() {
+    const text = messages[msgIndex];
+    intro.textContent = text.slice(0, charIndex);
+    intro.appendChild(cursor);
+    charIndex++;
+    if (charIndex > text.length) {
+      charIndex = 0;
+      msgIndex = (msgIndex + 1) % messages.length;
+      setTimeout(type, 1500);
+    } else setTimeout(type, 70);
+  }
+  type();
+}
+
+// === Teknoloji Döngüsü ===
+const techEl = document.getElementById("tech");
+if (techEl) {
+  const techs = ["Django", "Python", "Flutter", "Tailwind", "PostgreSQL", "Google App Script"];
+  let i = 0;
+  function cycleTech() {
+    techEl.classList.remove("animate-fade-in");
+    void techEl.offsetWidth; // restart animation
+    techEl.textContent = techs[i];
+    techEl.classList.add("animate-fade-in");
+    i = (i + 1) % techs.length;
+  }
+  cycleTech();
+  setInterval(cycleTech, 2500);
+}
+
+// === Scroll Progress Bar ===
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progress = (scrollTop / height) * 100;
+  document.getElementById("progressBar").style.width = progress + "%";
+});
+
+// === Modal (Benimle Tanış) ===
+const modal = document.getElementById("aboutModal");
+if (modal) {
+  const modalBox = modal.querySelector(".modal-box");
+  document.getElementById("aboutBtn").addEventListener("click", () => {
+    modal.classList.remove("hidden");
+    setTimeout(() => modalBox.classList.add("scale-100", "opacity-100"), 50);
+  });
+  document.getElementById("closeModal").addEventListener("click", () => {
+    modalBox.classList.remove("scale-100", "opacity-100");
+    setTimeout(() => modal.classList.add("hidden"), 300);
+  });
+}

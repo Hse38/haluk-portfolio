@@ -192,3 +192,35 @@ header {
   white-space: normal; /* alt satıra geçebilsin */
   max-width: 100%; /* kutudan taşmaz */
 }
+/* === ANİMASYONLAR === */
+@keyframes fade-slide {
+  0% { opacity: 0; transform: translateY(8px); }
+  25% { opacity: 1; transform: translateY(0); }
+  75% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+.animate-fade-in {
+  animation: fade-slide 2.5s ease-in-out infinite;
+}
+
+/* Typewriter efekti */
+@keyframes blink { 50% { opacity: 0; } }
+.cursor {
+  display: inline-block;
+  width: 2px;
+  background: #6D5DF6;
+  margin-left: 4px;
+  animation: blink 0.8s infinite;
+}
+
+/* Modal ve tema geçiş efektleri */
+html {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+.dark body {
+  filter: drop-shadow(0 0 10px rgba(109,93,246,0.2));
+}
+#aboutModal {
+  backdrop-filter: blur(6px);
+  transition: opacity 0.3s ease;
+}
