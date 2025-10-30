@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI-Ders | Yapay Zekâ Destekli Öğrenci Takip Sistemi — Ekinci Software Solutions</title>
+  <meta name="description" content="AI-Ders: Öğrenci, öğretmen ve veli panelleriyle kişiselleştirilmiş öğrenme; yapay zekâ önerileri, Gantt ve grafikli takip." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+  <style>
+    :root{
+      --dark:#0D1B2A;
+      --night:#1B263B;
+      --accent:#FF8C00;
+    }
+    html,body{background:var(--dark);color:white;font-family:Inter,system-ui,Arial;}
+    .font-display{font-family:Montserrat,Inter,system-ui,Arial;}
+    .glass{backdrop-filter:blur(14px); background:rgba(255,255,255,.06);}
+    .tag{border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); border-radius:999px; padding:.25rem .6rem; font-size:.75rem}
+    .card{border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); border-radius:18px}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent)}
+    .gantt-row{display:grid; grid-template-columns:120px 1fr; gap:12px; align-items:center;}
+    .gantt-bar{height:10px;border-radius:999px;background:rgba(255,255,255,.08);position:relative}
+    .gantt-bar span{position:absolute;height:100%;left:var(--start);width:var(--len);background:linear-gradient(90deg,#ff8c00,#ffb14a);border-radius:999px;box-shadow:0 0 12px rgba(255,140,0,.45)}
+    .grad{background:linear-gradient(180deg, var(--night), #000);}
+    .tilt{transition:transform .25s ease;}
+    .tilt:hover{transform:perspective(1200px) rotateX(2deg) rotateY(-2deg);}
+  </style>
+</head>
+<body class="grad">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-black/20 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl grid place-items-center bg-white/10 border border-white/10">
+          <span class="text-orange-400 font-bold">AI</span>
+        </div>
+        <div class="leading-tight">
+          <p class="font-display font-extrabold tracking-tight">AI-Ders</p>
+          <p class="text-xs text-white/60">Ekinci Software Solutions</p>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-white/80">
+        <a href="#sistem" class="hover:text-white">Sistem</a>
+        <a href="#ekranlar" class="hover:text-white">Ekranlar</a>
+        <a href="#analitik" class="hover:text-white">Analitik</a>
+        <a href="#iletisim" class="hover:text-white">İletişim</a>
+        <a href="/" class="tag">↩ Ana Sayfa</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute -top-20 -left-24 w-[600px] h-[600px] rounded-full bg-orange-500/20 blur-3xl"></div>
+      <div class="absolute -bottom-28 -right-24 w-[600px] h-[600px] rounded-full bg-cyan-400/20 blur-3xl"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-5 py-24 md:py-36 relative z-10">
+      <div class="max-w-3xl" data-aos="fade-up">
+        <div class="tag inline-flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-orange-400"></span> Yapay Zekâ Destekli Öğrenme
+        </div>
+        <h1 class="font-display text-4xl md:text-6xl font-extrabold leading-[1.05] mt-5">
+          Her öğrencinin <span class="text-orange-400">öğrenme yolculuğu</span> kişiselleştiriliyor.
+        </h1>
+        <p class="text-lg md:text-xl text-white/80 mt-5">
+          Öğretmen, öğrenci ve veli için üç panel. Yapay zekâ ile konu bazlı ölçüm, öneri ve Gantt tabanlı ilerleme takibi.
+        </p>
+        <div class="mt-8 flex items-center gap-4">
+          <a href="#ekranlar" class="px-5 py-3 rounded-xl bg-orange-500 hover:bg-orange-400 transition">Sistemi Keşfet</a>
+          <a href="#iletisim" class="px-5 py-3 rounded-xl border border-white/15 hover:bg-white/5 transition">İş Birliği</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EKRANLAR -->
+  <section id="ekranlar" class="py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-5 text-center">
+      <h2 class="font-display text-3xl md:text-4xl font-extrabold text-orange-400">Üç Panel — Tek Amaç</h2>
+      <p class="text-white/70 mt-3 max-w-2xl mx-auto">Öğretmen, öğrenci ve veli için kişisel arayüzler. Her biri, öğrenme sürecini ölçmek ve geliştirmek için tasarlandı.</p>
+      <div class="grid lg:grid-cols-3 gap-6 mt-10">
+        <div class="card p-6 tilt" data-aos="zoom-in">
+          <h3 class="font-semibold text-white">🧑‍🏫 Öğretmen Paneli</h3>
+          <p class="text-sm text-white/70 mt-2">Konu yükle, test ata, sınıf analizini gör.</p>
+        </div>
+        <div class="card p-6 tilt" data-aos="zoom-in" data-aos-delay="100">
+          <h3 class="font-semibold text-white">🧑‍🎓 Öğrenci Paneli</h3>
+          <p class="text-sm text-white/70 mt-2">Test çöz, anlık geri bildirim al, gelişimini izle.</p>
+        </div>
+        <div class="card p-6 tilt" data-aos="zoom-in" data-aos-delay="200">
+          <h3 class="font-semibold text-white">👨‍👩‍👧 Veli Paneli</h3>
+          <p class="text-sm text-white/70 mt-2">Gantt grafikleriyle ilerlemeyi takip et.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANALITIK -->
+  <section id="analitik" class="py-16 md:py-24 border-t border-white/10">
+    <div class="max-w-5xl mx-auto px-5 text-center">
+      <h2 class="font-display text-3xl md:text-4xl font-extrabold text-orange-400">Yapay Zekâ & Analitik</h2>
+      <p class="text-white/70 mt-3">Sistem öğrenci performansını analiz eder, zayıf konularda tekrar planı oluşturur ve öğretmen-veli arası bilgi köprüsü kurar.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="iletisim" class="py-16 border-t border-white/10 bg-black/30">
+    <div class="max-w-7xl mx-auto px-5 text-center">
+      <h4 class="font-display text-2xl md:text-3xl font-bold text-orange-400">Ezber değil, gelişim.</h4>
+      <p class="text-white/70 mt-2">Veriyle öğrenen bir nesil.</p>
+      <div class="mt-6 grid sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
+        <div class="card p-3">Haluk Şakir Ekinci</div>
+        <div class="card p-3">hseekinci@gmail.com</div>
+        <div class="card p-3">haluksakirekinci.com.tr</div>
+      </div>
+      <p class="text-white/50 text-sm mt-8">© 2025 — Ekinci Software Solutions</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init({ once:true, duration:700, easing:"ease-out" });</script>
+</body>
+</html>
