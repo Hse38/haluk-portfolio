@@ -3,21 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI-Ders | V3 Interaktif Demo — Ekinci Software Solutions</title>
-  <meta name="description" content="AI-Ders: Parçacık arka plan, soru havuzu modali, öğrenci zamanlayıcısı ve veli hafta filtresi ile interaktif demo.">
+  <title>AI-Ders | Kurumsal Demo (V6) — Ekinci Software Solutions</title>
+  <meta name="description" content="AI-Ders: Öğretmen, öğrenci ve veli panelleri; 4 şıklı test, AI analiz, Gantt ilerleyiş ve canlı grafikler ile kurumsal demo.">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
   <style>
-    :root{--dark:#0D1B2A;--night:#111827;--accent:#FF8C00;}
+    :root{--accent:#FF8C00;}
     html,body{height:100%;}
-    body{background:linear-gradient(180deg,var(--night),#000);color:white;font-family:Inter,system-ui,Arial;}
+    body{
+      background:
+        radial-gradient(600px 300px at 10% -10%, rgba(255,140,0,.18), transparent 60%),
+        radial-gradient(600px 300px at 110% 110%, rgba(0,140,255,.12), transparent 60%),
+        linear-gradient(180deg,#0D1B2A,#000);
+      color:#fff; font-family:Inter,system-ui,Arial;
+    }
     .font-display{font-family:Montserrat,Inter,system-ui;}
     .glass{backdrop-filter:blur(14px); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);}
     .tag{border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); border-radius:999px; padding:.25rem .6rem; font-size:.75rem}
-    .card{border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.05); border-radius:1rem; padding:1rem; transition:.3s; backdrop-filter:blur(8px);}
-    .card:hover{transform:translateY(-4px) scale(1.01); border-color:rgba(255,255,255,.25); box-shadow:0 10px 30px rgba(255,140,0,.15);}
+    .card{border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.05); border-radius:1rem; padding:1rem; transition:.25s; backdrop-filter:blur(10px);}
+    .card:hover{transform:translateY(-2px); border-color:rgba(255,255,255,.2); box-shadow:0 10px 30px rgba(255,140,0,.15);}
     .btn{background:var(--accent); color:white; padding:.55rem 1rem; border-radius:.6rem; transition:.2s;}
     .btn:hover{background:#ffa733;}
     input,select{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.1); border-radius:.6rem; padding:.45rem .6rem; width:100%; color:white;}
@@ -29,6 +35,14 @@
     .modal.open{display:flex;}
     .backdrop{position:absolute; inset:0; background:rgba(0,0,0,.6);}
     .modal-card{position:relative; z-index:1;}
+    /* options */
+    .opt{border:1px solid rgba(255,255,255,.12);border-radius:.6rem;padding:.45rem .6rem;cursor:pointer}
+    .opt:hover{background:rgba(255,255,255,.06)}
+    .opt.selected{background:rgba(255,140,0,.18);border-color:#ffb058}
+    .opt.disabled{opacity:.6;pointer-events:none}
+    /* gantt */
+    .gantt{height:10px;background:rgba(255,255,255,.10);border-radius:999px;position:relative;overflow:hidden}
+    .gantt span{position:absolute;height:100%;left:var(--start);width:var(--len);border-radius:999px;background:linear-gradient(90deg,#ff8c00,#ffc06a);box-shadow:0 0 12px rgba(255,140,0,.35)}
   </style>
 </head>
 <body>
@@ -65,16 +79,9 @@
           Her öğrencinin <span class="text-orange-400">öğrenme yolculuğu</span> kişiselleştiriliyor.
         </h1>
         <p class="text-lg md:text-xl text-white/80 mt-5">
-          Öğretmen, öğrenci ve veli için üç panel. Yapay zekâ ile konu bazlı ölçüm, öneri ve Gantt tabanlı ilerleme takibi.
+          Öğretmen, öğrenci ve veli için üç panel. 4 şıklı test, anlık analiz, öneriler ve Gantt tabanlı ilerleme takibiyle
+          <b>ödev/ders planı + öğrenci yönetim sistemi</b> deneyimini birlikte sunar.
         </p>
-
-        <!-- Parçacık yoğunluğu kontrolü -->
-        <div class="mt-6 glass rounded-xl p-4">
-          <label class="text-sm text-white/70">AI parçacık yoğunluğu: <span id="densityValue" class="text-orange-400 font-semibold">40</span></label>
-          <input id="density" type="range" min="10" max="120" value="40" class="w-full mt-2 accent-orange-500">
-          <p class="text-xs text-white/60 mt-1">Kaydır: daha az / daha fazla parçacık</p>
-        </div>
-
         <div class="mt-8 flex items-center gap-4">
           <a href="#ekranlar" class="btn">Sistemi Keşfet</a>
           <a href="#iletisim" class="btn" style="background:transparent; border:1px solid rgba(255,255,255,.25);">İş Birliği</a>
@@ -111,6 +118,13 @@
             <div class="divider my-3"></div>
             <div class="text-xs text-white/70">Sınıf Başarı Dağılımı</div>
             <canvas id="teacherChart" class="mt-2"></canvas>
+
+            <div class="divider my-4"></div>
+            <div class="text-xs text-white/70 mb-1">Konu Güç Haritası</div>
+            <canvas id="radarChart"></canvas>
+
+            <div class="divider my-4"></div>
+            <div id="teacherText" class="text-sm text-white/80">Henüz gönderim yapılmadı.</div>
           </div>
         </div>
 
@@ -131,13 +145,10 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-5 gap-2 text-center text-sm mt-2" id="testGrid"></div>
-          <div class="mt-4 bg-white/10 rounded-lg p-2 text-sm">💡 AI Önerisi: “Üslü Sayılar” konusunu tekrar et. 3 gün sonrası için 10 soruluk test planlandı.</div>
-          <button class="btn mt-3 w-full" onclick="toast('Yeni test atandı 🎯')">Yeni Test Al</button>
-
-          <div class="divider my-3"></div>
-          <div class="text-xs text-white/70">Konu Güç Haritası</div>
-          <canvas id="radarChart" class="mt-2"></canvas>
+          <!-- 4 şıklı mini test -->
+          <p class="text-sm text-white/70 mb-2">4 farklı konudan 4 soru. Şıkları işaretle ve “Tamamlandı” de.</p>
+          <div id="qwrap" class="space-y-4 text-sm"></div>
+          <button id="submitBtn" class="btn w-full mt-4">Tamamlandı</button>
         </div>
 
         <!-- VELİ PANELİ -->
@@ -154,16 +165,26 @@
               </select>
             </div>
 
-            <div class="text-xs text-white/70">Aylık Gantt Planı</div>
+            <div class="text-xs text-white/70">Bu Haftaki Ders Geçmişi (Gantt)</div>
             <div class="space-y-2">
-              <div class="h-3 w-full bg-white/10 rounded-full relative overflow-hidden"><span class="absolute left-[10%] w-[40%] h-full bg-orange-500 rounded-full"></span></div>
-              <div class="h-3 w-full bg-white/10 rounded-full relative overflow-hidden"><span class="absolute left-[25%] w-[45%] h-full bg-orange-400 rounded-full"></span></div>
-              <div class="h-3 w-full bg-white/10 rounded-full relative overflow-hidden"><span class="absolute left-[5%]  w-[30%] h-full bg-orange-300 rounded-full"></span></div>
+              <div class="grid grid-cols-7 gap-2 text-xs text-white/60">
+                <div class="text-center">Pzt</div><div class="text-center">Sal</div><div class="text-center">Çar</div>
+                <div class="text-center">Per</div><div class="text-center">Cum</div><div class="text-center">Cmt</div><div class="text-center">Paz</div>
+              </div>
+              <div class="gantt"><span id="g1" style="--start:5%;--len:20%"></span></div>
+              <div class="gantt"><span id="g2" style="--start:30%;--len:22%"></span></div>
+              <div class="gantt"><span id="g3" style="--start:55%;--len:18%"></span></div>
             </div>
+            <div class="text-xs text-white/60" id="weekSummary">—</div>
 
             <div class="divider my-3"></div>
-            <div class="text-xs text-white/70">Başarı Yüzdesi</div>
-            <canvas id="lineChart" class="mt-2"></canvas>
+            <div class="text-xs text-white/70">Başarı Yüzdesi (Konu Bazlı)</div>
+            <canvas id="barChart" class="mt-1"></canvas>
+
+            <div class="divider my-3"></div>
+            <div class="text-xs text-white/70">Haftalık Başarı Trendi</div>
+            <canvas id="lineChart" class="mt-1"></canvas>
+
             <button class="btn mt-3 w-full" onclick="toast('Rapor indirildi 📊')">Rapor Al</button>
           </div>
         </div>
@@ -176,11 +197,14 @@
     <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-8 items-start">
       <div class="glass p-6 rounded-2xl" data-aos="fade-right">
         <h4 class="font-display text-2xl font-bold text-orange-400">Yapay Zekâ & Öneri Motoru</h4>
-        <p class="text-white/80 mt-3">Performans geçmişini analiz eder, zayıf konular için tekrar planı üretir ve her öğrenci için kişisel öğrenme profili oluşturur.</p>
+        <p class="text-white/80 mt-3">
+          Performans geçmişini analiz eder, zayıf konulara odaklı tekrar planı üretir ve her öğrenci için kişisel öğrenme profili oluşturur.
+          Test sonuçlarından “bir sonraki en iyi adım” önerileri sunar.
+        </p>
         <ul class="mt-3 text-white/90 space-y-1">
           <li>• Konu bazlı başarı trendleri</li>
           <li>• Çözüm süresi / tekrar sayısı</li>
-          <li>• “Bir sonraki en iyi adım” önerileri</li>
+          <li>• Ödev uyumu ve tamamlama oranları</li>
         </ul>
       </div>
       <div class="glass p-6 rounded-2xl" data-aos="fade-left">
@@ -193,7 +217,7 @@
           <div class="tag">Scikit-learn</div>
           <div class="tag">Role-based Access</div>
         </div>
-        <p class="text-white/70 text-sm mt-4">KVKK uyumlu • SSL şifreleme • Okul ERP entegrasyonu (e-Okul, Koza ERP vb.)</p>
+        <p class="text-white/70 text-sm mt-4">KVKK uyumlu • SSL şifreleme • Okul sistemleri entegrasyonu (e-Okul vb.)</p>
       </div>
     </div>
   </section>
@@ -244,20 +268,6 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ once:true, duration:700, easing:"ease-out" });
-    
-    loadParticles(defaultDensity);
-
-    densitySlider.addEventListener('input', async (e)=>{
-      const v = +e.target.value;
-      densityValue.textContent = v;
-      if(particlesInstance){
-        await particlesInstance.load({
-          particles: {
-            number: { value: v, density: { enable: true, area: 800 } }
-          }
-        });
-      }
-    });
 
     // ---------- Toast ----------
     function toast(msg){
@@ -279,88 +289,185 @@
       const s = String(seconds%60).padStart(2,'0');
       timerEl.textContent = `${m}:${s}`;
     }
-    startBtn.onclick = ()=>{
-      if(timerInterval) return;
-      timerInterval = setInterval(()=>{ seconds++; renderTime(); }, 1000);
-    };
-    pauseBtn.onclick = ()=>{
-      clearInterval(timerInterval); timerInterval=null;
-    };
-    resetBtn.onclick = ()=>{
-      seconds=0; renderTime(); clearInterval(timerInterval); timerInterval=null;
-    };
+    startBtn.onclick = ()=>{ if(timerInterval) return; timerInterval=setInterval(()=>{ seconds++; renderTime(); },1000); };
+    pauseBtn.onclick = ()=>{ clearInterval(timerInterval); timerInterval=null; };
+    resetBtn.onclick = ()=>{ seconds=0; renderTime(); clearInterval(timerInterval); timerInterval=null; };
     renderTime();
 
-    // ---------- Öğrenci: 20 soruluk grid ----------
-    const grid = document.getElementById('testGrid');
-    for(let i=1;i<=20;i++){
-      const d = document.createElement('div');
-      d.className='p-2 border border-white/10 rounded-lg cursor-pointer hover:bg-white/10 text-center select-none';
-      d.textContent=i;
-      d.onclick=()=>{
-        if(d.classList.contains('bg-green-600/50')){
-          d.classList.remove('bg-green-600/50','border-green-500');
-          d.classList.add('bg-red-600/40','border-red-500');
-        } else if(d.classList.contains('bg-red-600/40')){
-          d.classList.remove('bg-red-600/40','border-red-500');
-        } else {
-          d.classList.add('bg-green-600/50','border-green-500');
+    // ---------- Öğrenci: 4 şıklı mini test ----------
+    const QUESTIONS = [
+      { topic: 'Üslü',       question: '2^3 kaçtır?',                            options: ['4','6','8','9'],        correct: 2 },
+      { topic: 'Olasılık',   question: 'Zar atışında 6 gelme olasılığı?',         options: ['1/2','1/3','1/6','1/4'], correct: 2 },
+      { topic: 'Eşitsizlik', question: 'x>3, y<2 ise x+y > ?',                   options: ['4','5','6','1'],         correct: 0 },
+      { topic: 'Trig.',      question: 'sin(90°) kaçtır?',                       options: ['0','1','√3/2','1/2'],    correct: 1 },
+    ];
+    const qwrap = document.getElementById('qwrap');
+    const userAnswers = Array(QUESTIONS.length).fill(null);
+
+    QUESTIONS.forEach((q,qi)=>{
+      const box = document.createElement('div');
+      box.innerHTML = `
+        <div class="flex items-center justify-between">
+          <div class="text-orange-400 font-semibold">${qi+1}. ${q.topic}</div>
+          <div class="tag">${q.question}</div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 mt-2" id="opts-${qi}"></div>
+      `;
+      qwrap.appendChild(box);
+      const opts = box.querySelector(`#opts-${qi}`);
+      q.options.forEach((opt,oi)=>{
+        const el = document.createElement('button');
+        el.className = 'opt';
+        el.textContent = ['A) ','B) ','C) ','D) '][oi] + opt;
+        el.onclick = ()=>{
+          document.querySelectorAll(`#opts-${qi} .opt`).forEach(b=>b.classList.remove('selected'));
+          el.classList.add('selected');
+          userAnswers[qi] = oi;
+        };
+        opts.appendChild(el);
+      });
+    });
+
+    // ---------- Charts ----------
+        // Radar + Veli bar + Veli line (init nötr)
+        let radar, bar, line;
+
+        function buildRadar(data=[25,25,25,25]){
+            if(radar) radar.destroy();
+            const rctx = document.getElementById('radarChart');
+            radar = new Chart(rctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Üslü','Olasılık','Eşitsizlik','Trig.'],
+                    datasets: [{
+                        data,
+                        backgroundColor: 'rgba(255,140,0,.18)',
+                        borderColor: 'rgba(255,140,0,.9)',
+                        pointBackgroundColor: 'rgba(255,140,0,.9)'
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display:false } },
+                    scales: {
+                        r: {
+                            angleLines: { color:'rgba(255,255,255,.15)' },
+                            grid: { color:'rgba(255,255,255,.12)' },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            pointLabels: { color:'#cbd5e1' },
+                            ticks: { display:false }
+                        }
+                    }
+                }
+            });
         }
-      };
-      grid.appendChild(d);
+
+        function buildBar(data=[0,0,0,0]){
+            if(bar) bar.destroy();
+            const bctx = document.getElementById('barChart');
+            bar = new Chart(bctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Üslü','Olasılık','Eşitsizlik','Trig.'],
+                    datasets: [{
+                        data,
+                        backgroundColor: ['#f97316','#22c55e','#f59e0b','#3b82f6']
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display:false } },
+                    scales: {
+                        x: { ticks: { color:'#e5e7eb' } },
+                        y: { ticks: { color:'#e5e7eb' }, suggestedMax: 100 }
+                    }
+                }
+            });
+        }
+
+        function buildLine(n=4){
+            if(line) line.destroy();
+            const lctx = document.getElementById('lineChart');
+            const weeks = Array.from({length:n},(_,i)=>`Hafta ${i+1}`);
+            const vals  = Array.from({length:n},(_,i)=> Math.min(95, 50 + i*(45/n) + Math.random()*5));
+
+            line = new Chart(lctx, {
+                type: 'line',
+                data: {
+                    labels: weeks,
+                    datasets: [{
+                        data: vals,
+                        borderColor: 'rgba(255,140,0,.9)',
+                        backgroundColor: 'rgba(255,140,0,.2)',
+                        fill: true,
+                        tension: .3
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display:false } },
+                    scales: {
+                        x: { ticks: { color:'white' } },
+                        y: { ticks: { color:'white' }, max: 100 }
+                    }
+                }
+            });
+        }
+
+        // ilk çizimler
+        buildRadar();
+        buildBar();
+        buildLine(4);
+
+        // hafta filtresi değişimi
+        document.getElementById('weekFilter').onchange = (e) => {
+            buildLine(+e.target.value);
+        };
+    </script>
+
+  <script> 
+    // ---------- Submit logic (öğrenci → öğretmen & veli senkron) ----------
+    document.getElementById('submitBtn').onclick = () => {
+        if (userAnswers.some(v => v === null)) {
+            toast('Lütfen tüm soruları işaretle.');
+        return;
     }
 
-    // ---------- Öğretmen: Soru havuzu modal ----------
-    const poolModal = document.getElementById('poolModal');
-    document.getElementById('openPool').onclick = ()=> poolModal.classList.add('open');
-    document.getElementById('closePool').onclick = ()=> poolModal.classList.remove('open');
-    document.getElementById('closeBtn').onclick = ()=> poolModal.classList.remove('open');
-    document.getElementById('xPool').onclick = ()=> poolModal.classList.remove('open');
+    document.querySelectorAll('.opt').forEach(b => b.classList.add('disabled'));
 
-    document.getElementById('addSelected').onclick = ()=>{
-      const checked = Array.from(poolModal.querySelectorAll('input[type=checkbox]:checked')).map(i=>i.value);
-      poolModal.classList.remove('open');
-      if(checked.length) toast(`${checked.length} soru eklendi ✅`);
-      else toast('Seçim yapılmadı');
-    };
+    // Puanlama
+    const scores = QUESTIONS.map((q, i) => (userAnswers[i] === q.correct ? 100 : 40));
+    const wrongs = QUESTIONS.map((q, i) => (userAnswers[i] === q.correct ? null : q.topic)).filter(Boolean);
+    const correctCount = scores.filter(s => s === 100).length;
 
-    // ---------- Chart.js ----------
-    // Öğretmen bar
-    new Chart(document.getElementById('teacherChart'),{
-      type:'bar',
-      data:{labels:['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10'],
-        datasets:[{data:[62,74,58,80,69,77,65,81,70,75], backgroundColor:'rgba(255,140,0,.7)'}]},
-      options:{plugins:{legend:{display:false}}, scales:{x:{ticks:{color:'white'}}, y:{ticks:{color:'white'}, max:100}}}
-    });
+    // Öğretmen Analizi
+    const teacherHTML = `
+        <p class="text-white">Sonuç Analizi:</p>
+        <ul class="list-disc list-inside mt-2">
+            ${QUESTIONS.map((q, i) => `
+                <li>${q.topic} — ${userAnswers[i] === q.correct
+                    ? '<span class="text-green-400">Doğru</span>'
+                    : '<span class="text-red-400">Yanlış</span>'}</li>
+            `).join('')}
+        </ul>
+        <p class="mt-2 text-orange-400 text-sm">
+            Öneri: ${wrongs.length
+                ? wrongs.join(', ') + ' konularını tekrar edin.'
+                : 'Tüm konular iyi, pekiştirme testi önerilir.'}
+        </p>
+    `;
+    document.getElementById('teacherText').innerHTML = teacherHTML;
 
-    // Öğrenci radar
-    new Chart(document.getElementById('radarChart'),{
-      type:'radar',
-      data:{labels:['Üslü','Olasılık','Eşitsizlik','Polinom','Trig.'],
-        datasets:[{data:[60,80,55,68,70], backgroundColor:'rgba(255,140,0,.2)', borderColor:'rgba(255,140,0,.8)'}]},
-      options:{plugins:{legend:{display:false}}, scales:{r:{pointLabels:{color:'white'}, grid:{color:'rgba(255,255,255,.1)'}, ticks:{display:false, max:100}}}}
-    });
+    // Veli Gantt + Bar + Özet
+    document.getElementById('weekSummary').textContent = `Doğru: ${correctCount}/4 (${Math.round(correctCount / 4 * 100)}%)`;
+    document.getElementById('g1').style.setProperty('--len', (15 + correctCount * 5) + '%');
+    document.getElementById('g2').style.setProperty('--len', (18 + correctCount * 4) + '%');
+    document.getElementById('g3').style.setProperty('--len', (14 + correctCount * 6) + '%');
 
-    // Veli line (hafta filtresi)
-    const lineCtx = document.getElementById('lineChart');
-    const weekFilter = document.getElementById('weekFilter');
-    const genWeeks = (n)=> Array.from({length:n},(_,i)=>`Hafta ${i+1}`);
-    const genData = (n)=> {
-      const base = 45; const step = 55/n;
-      return Array.from({length:n},(_,i)=> Math.min(95, Math.round(base + i*step + Math.random()*5)));
-    };
-    let lineChart = new Chart(lineCtx, {
-      type:'line',
-      data:{labels:genWeeks(4), datasets:[{data:genData(4), borderColor:'rgba(255,140,0,.9)', backgroundColor:'rgba(255,140,0,.2)', fill:true, tension:.3}]},
-      options:{plugins:{legend:{display:false}}, scales:{x:{ticks:{color:'white'}}, y:{ticks:{color:'white'}, max:100}}}
-    });
+    buildRadar(scores);
+    buildBar(scores);
 
-    weekFilter.onchange = (e)=>{
-      const n = +e.target.value;
-      lineChart.data.labels = genWeeks(n);
-      lineChart.data.datasets[0].data = genData(n);
-      lineChart.update();
-    };
-  </script>
+    toast('Test gönderildi ✅');
+  };
+ </script>
+
 </body>
 </html>
