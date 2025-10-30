@@ -3,50 +3,53 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI-Ders | Yapay Zekâ Destekli Öğrenci Takip Sistemi — Ekinci Software Solutions</title>
-  <meta name="description" content="AI-Ders: Öğrenci, öğretmen ve veli panelleriyle kişiselleştirilmiş öğrenme; yapay zekâ önerileri, Gantt ve grafikli takip." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>AI-Ders | V3 Interaktif Demo — Ekinci Software Solutions</title>
+  <meta name="description" content="AI-Ders: Parçacık arka plan, soru havuzu modali, öğrenci zamanlayıcısı ve veli hafta filtresi ile interaktif demo.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+  <!-- tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.7.1/tsparticles.bundle.min.js"></script>
   <style>
-    :root{
-      --dark:#0D1B2A;
-      --night:#1B263B;
-      --accent:#FF8C00;
-    }
-    html,body{background:var(--dark);color:white;font-family:Inter,system-ui,Arial;}
-    .font-display{font-family:Montserrat,Inter,system-ui,Arial;}
-    .glass{backdrop-filter:blur(14px); background:rgba(255,255,255,.06);}
+    :root{--dark:#0D1B2A;--night:#111827;--accent:#FF8C00;}
+    html,body{height:100%;}
+    body{background:linear-gradient(180deg,var(--night),#000);color:white;font-family:Inter,system-ui,Arial;}
+    .font-display{font-family:Montserrat,Inter,system-ui;}
+    .glass{backdrop-filter:blur(14px); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);}
     .tag{border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); border-radius:999px; padding:.25rem .6rem; font-size:.75rem}
-    .card{border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); border-radius:18px}
+    .card{border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.05); border-radius:1rem; padding:1rem; transition:.3s; backdrop-filter:blur(8px);}
+    .card:hover{transform:translateY(-4px) scale(1.01); border-color:rgba(255,255,255,.25); box-shadow:0 10px 30px rgba(255,140,0,.15);}
+    .btn{background:var(--accent); color:white; padding:.55rem 1rem; border-radius:.6rem; transition:.2s;}
+    .btn:hover{background:#ffa733;}
+    input,select{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.1); border-radius:.6rem; padding:.45rem .6rem; width:100%; color:white;}
     .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent)}
-    .gantt-row{display:grid; grid-template-columns:120px 1fr; gap:12px; align-items:center;}
-    .gantt-bar{height:10px;border-radius:999px;background:rgba(255,255,255,.08);position:relative}
-    .gantt-bar span{position:absolute;height:100%;left:var(--start);width:var(--len);background:linear-gradient(90deg,#ff8c00,#ffb14a);border-radius:999px;box-shadow:0 0 12px rgba(255,140,0,.45)}
-    .grad{background:linear-gradient(180deg, var(--night), #000);}
-    .tilt{transition:transform .25s ease;}
-    .tilt:hover{transform:perspective(1200px) rotateX(2deg) rotateY(-2deg);}
+    .toast{position:fixed;bottom:20px;right:20px;background:rgba(0,0,0,.85);color:#fff;padding:.75rem 1.25rem;border-radius:.6rem;opacity:0;transform:translateY(20px);transition:.25s;z-index:70;}
+    .toast.show{opacity:1;transform:translateY(0);}
+    /* modal */
+    .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:80;}
+    .modal.open{display:flex;}
+    .backdrop{position:absolute; inset:0; background:rgba(0,0,0,.6);}
+    .modal-card{position:relative; z-index:1;}
   </style>
 </head>
-<body class="grad">
+<body>
+  <!-- Particles Background -->
+  <div id="tsparticles" style="position:fixed; inset:0; z-index:0;"></div>
 
   <!-- HEADER -->
-  <header class="sticky top-0 z-40 backdrop-blur-xl bg-black/20 border-b border-white/10">
+  <header class="sticky top-0 z-30 backdrop-blur-xl bg-black/30 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
       <a href="/" class="flex items-center gap-3">
         <div class="w-9 h-9 rounded-xl grid place-items-center bg-white/10 border border-white/10">
           <span class="text-orange-400 font-bold">AI</span>
         </div>
-        <div class="leading-tight">
-          <p class="font-display font-extrabold tracking-tight">AI-Ders</p>
+        <div>
+          <p class="font-display font-extrabold">AI-Ders</p>
           <p class="text-xs text-white/60">Ekinci Software Solutions</p>
         </div>
       </a>
       <nav class="hidden md:flex items-center gap-6 text-sm text-white/80">
-        <a href="#sistem" class="hover:text-white">Sistem</a>
         <a href="#ekranlar" class="hover:text-white">Ekranlar</a>
         <a href="#analitik" class="hover:text-white">Analitik</a>
         <a href="#iletisim" class="hover:text-white">İletişim</a>
@@ -56,13 +59,9 @@
   </header>
 
   <!-- HERO -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0">
-      <div class="absolute -top-20 -left-24 w-[600px] h-[600px] rounded-full bg-orange-500/20 blur-3xl"></div>
-      <div class="absolute -bottom-28 -right-24 w-[600px] h-[600px] rounded-full bg-cyan-400/20 blur-3xl"></div>
-    </div>
-    <div class="max-w-7xl mx-auto px-5 py-24 md:py-36 relative z-10">
-      <div class="max-w-3xl" data-aos="fade-up">
+  <section class="relative overflow-hidden z-10">
+    <div class="max-w-7xl mx-auto px-5 py-16 md:py-24 relative z-10">
+      <div class="max-w-4xl" data-aos="fade-up">
         <div class="tag inline-flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-orange-400"></span> Yapay Zekâ Destekli Öğrenme
         </div>
@@ -72,59 +71,328 @@
         <p class="text-lg md:text-xl text-white/80 mt-5">
           Öğretmen, öğrenci ve veli için üç panel. Yapay zekâ ile konu bazlı ölçüm, öneri ve Gantt tabanlı ilerleme takibi.
         </p>
+
+        <!-- Parçacık yoğunluğu kontrolü -->
+        <div class="mt-6 glass rounded-xl p-4">
+          <label class="text-sm text-white/70">AI parçacık yoğunluğu: <span id="densityValue" class="text-orange-400 font-semibold">40</span></label>
+          <input id="density" type="range" min="10" max="120" value="40" class="w-full mt-2 accent-orange-500">
+          <p class="text-xs text-white/60 mt-1">Kaydır: daha az / daha fazla parçacık</p>
+        </div>
+
         <div class="mt-8 flex items-center gap-4">
-          <a href="#ekranlar" class="px-5 py-3 rounded-xl bg-orange-500 hover:bg-orange-400 transition">Sistemi Keşfet</a>
-          <a href="#iletisim" class="px-5 py-3 rounded-xl border border-white/15 hover:bg-white/5 transition">İş Birliği</a>
+          <a href="#ekranlar" class="btn">Sistemi Keşfet</a>
+          <a href="#iletisim" class="btn" style="background:transparent; border:1px solid rgba(255,255,255,.25);">İş Birliği</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- EKRANLAR -->
-  <section id="ekranlar" class="py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-5 text-center">
-      <h2 class="font-display text-3xl md:text-4xl font-extrabold text-orange-400">Üç Panel — Tek Amaç</h2>
-      <p class="text-white/70 mt-3 max-w-2xl mx-auto">Öğretmen, öğrenci ve veli için kişisel arayüzler. Her biri, öğrenme sürecini ölçmek ve geliştirmek için tasarlandı.</p>
-      <div class="grid lg:grid-cols-3 gap-6 mt-10">
-        <div class="card p-6 tilt" data-aos="zoom-in">
-          <h3 class="font-semibold text-white">🧑‍🏫 Öğretmen Paneli</h3>
-          <p class="text-sm text-white/70 mt-2">Konu yükle, test ata, sınıf analizini gör.</p>
+  <section id="ekranlar" class="py-16 md:py-24 z-10 relative">
+    <div class="max-w-7xl mx-auto px-5">
+      <h2 class="font-display text-3xl md:text-4xl font-extrabold text-orange-400 text-center" data-aos="fade-up">Üç Panel — Tek Amaç</h2>
+      <p class="text-white/70 text-center max-w-2xl mx-auto mt-3" data-aos="fade-up" data-aos-delay="100">
+        Öğretmen, öğrenci ve veli için kişisel arayüzler. Hepsi tıklanabilir ve etkileşimli.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-10">
+        <!-- ÖĞRETMEN PANELİ -->
+        <div class="card" id="teacher" data-aos="zoom-in">
+          <h3 class="font-semibold mb-2">🧑‍🏫 Öğretmen Paneli</h3>
+          <div class="space-y-2">
+            <select id="ders"><option>Matematik</option><option>Fen Bilgisi</option><option>Türkçe</option></select>
+            <select id="konu"><option>Üslü Sayılar</option><option>Olasılık</option><option>Eşitsizlikler</option></select>
+            <select id="adet"><option>10 Soru</option><option selected>20 Soru</option><option>30 Soru</option></select>
+
+            <div class="flex gap-2 mt-2">
+              <button class="btn flex-1" onclick="toast('Deneme oluşturuldu ✅')">Deneme Oluştur</button>
+              <button class="btn flex-1" style="background:transparent; border:1px solid rgba(255,255,255,.25); color:#ffb45a" onclick="toast('Ödev atandı 📘')">Ödeve Dönüştür</button>
+            </div>
+
+            <!-- Soru havuzu modalı aç -->
+            <button id="openPool" class="w-full mt-2 glass rounded-lg px-3 py-2 text-sm hover:bg-white/10">Soru Havuzu (Seç & Ekle)</button>
+
+            <div class="divider my-3"></div>
+            <div class="text-xs text-white/70">Sınıf Başarı Dağılımı</div>
+            <canvas id="teacherChart" class="mt-2"></canvas>
+          </div>
         </div>
-        <div class="card p-6 tilt" data-aos="zoom-in" data-aos-delay="100">
-          <h3 class="font-semibold text-white">🧑‍🎓 Öğrenci Paneli</h3>
-          <p class="text-sm text-white/70 mt-2">Test çöz, anlık geri bildirim al, gelişimini izle.</p>
+
+        <!-- ÖĞRENCİ PANELİ -->
+        <div class="card" id="student" data-aos="zoom-in" data-aos-delay="100">
+          <h3 class="font-semibold mb-2">🧑‍🎓 Öğrenci Paneli</h3>
+
+          <!-- Zamanlayıcı -->
+          <div class="glass rounded-lg p-3 mb-3">
+            <div class="flex items-center justify-between">
+              <div class="text-sm text-white/80">Zamanlayıcı</div>
+              <div id="timer" class="font-mono text-lg">00:00</div>
+            </div>
+            <div class="mt-2 flex gap-2">
+              <button class="btn flex-1" id="startTimer">Başlat</button>
+              <button class="btn flex-1" id="pauseTimer" style="background:#374151">Dur</button>
+              <button class="btn flex-1" id="resetTimer" style="background:#6B7280">Sıfırla</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-5 gap-2 text-center text-sm mt-2" id="testGrid"></div>
+          <div class="mt-4 bg-white/10 rounded-lg p-2 text-sm">💡 AI Önerisi: “Üslü Sayılar” konusunu tekrar et. 3 gün sonrası için 10 soruluk test planlandı.</div>
+          <button class="btn mt-3 w-full" onclick="toast('Yeni test atandı 🎯')">Yeni Test Al</button>
+
+          <div class="divider my-3"></div>
+          <div class="text-xs text-white/70">Konu Güç Haritası</div>
+          <canvas id="radarChart" class="mt-2"></canvas>
         </div>
-        <div class="card p-6 tilt" data-aos="zoom-in" data-aos-delay="200">
-          <h3 class="font-semibold text-white">👨‍👩‍👧 Veli Paneli</h3>
-          <p class="text-sm text-white/70 mt-2">Gantt grafikleriyle ilerlemeyi takip et.</p>
+
+        <!-- VELİ PANELİ -->
+        <div class="card" id="parent" data-aos="zoom-in" data-aos-delay="200">
+          <h3 class="font-semibold mb-2">👨‍👩‍👧 Veli Paneli</h3>
+          <div class="space-y-3">
+            <!-- Hafta filtresi -->
+            <div class="flex items-center gap-2">
+              <label class="text-xs text-white/70">Hafta filtresi</label>
+              <select id="weekFilter" class="flex-1">
+                <option value="4" selected>Son 4 Hafta</option>
+                <option value="8">Son 8 Hafta</option>
+                <option value="12">Son 12 Hafta</option>
+              </select>
+            </div>
+
+            <div class="text-xs text-white/70">Aylık Gantt Planı</div>
+            <div class="space-y-2">
+              <div class="h-3 w-full bg-white/10 rounded-full relative overflow-hidden"><span class="absolute left-[10%] w-[40%] h-full bg-orange-500 rounded-full"></span></div>
+              <div class="h-3 w-full bg-white/10 rounded-full relative overflow-hidden"><span class="absolute left-[25%] w-[45%] h-full bg-orange-400 rounded-full"></span></div>
+              <div class="h-3 w-full bg-white/10 rounded-full relative overflow-hidden"><span class="absolute left-[5%]  w-[30%] h-full bg-orange-300 rounded-full"></span></div>
+            </div>
+
+            <div class="divider my-3"></div>
+            <div class="text-xs text-white/70">Başarı Yüzdesi</div>
+            <canvas id="lineChart" class="mt-2"></canvas>
+            <button class="btn mt-3 w-full" onclick="toast('Rapor indirildi 📊')">Rapor Al</button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ANALITIK -->
-  <section id="analitik" class="py-16 md:py-24 border-t border-white/10">
-    <div class="max-w-5xl mx-auto px-5 text-center">
-      <h2 class="font-display text-3xl md:text-4xl font-extrabold text-orange-400">Yapay Zekâ & Analitik</h2>
-      <p class="text-white/70 mt-3">Sistem öğrenci performansını analiz eder, zayıf konularda tekrar planı oluşturur ve öğretmen-veli arası bilgi köprüsü kurar.</p>
+  <section id="analitik" class="py-16 md:py-24 border-t border-white/10 z-10 relative">
+    <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-8 items-start">
+      <div class="glass p-6 rounded-2xl" data-aos="fade-right">
+        <h4 class="font-display text-2xl font-bold text-orange-400">Yapay Zekâ & Öneri Motoru</h4>
+        <p class="text-white/80 mt-3">Performans geçmişini analiz eder, zayıf konular için tekrar planı üretir ve her öğrenci için kişisel öğrenme profili oluşturur.</p>
+        <ul class="mt-3 text-white/90 space-y-1">
+          <li>• Konu bazlı başarı trendleri</li>
+          <li>• Çözüm süresi / tekrar sayısı</li>
+          <li>• “Bir sonraki en iyi adım” önerileri</li>
+        </ul>
+      </div>
+      <div class="glass p-6 rounded-2xl" data-aos="fade-left">
+        <h4 class="font-display text-2xl font-bold text-orange-400">Altyapı</h4>
+        <div class="mt-3 grid sm:grid-cols-2 gap-3">
+          <div class="tag">Flutter (Web + Mobil)</div>
+          <div class="tag">Django / FastAPI</div>
+          <div class="tag">PostgreSQL</div>
+          <div class="tag">TensorFlow</div>
+          <div class="tag">Scikit-learn</div>
+          <div class="tag">Role-based Access</div>
+        </div>
+        <p class="text-white/70 text-sm mt-4">KVKK uyumlu • SSL şifreleme • Okul ERP entegrasyonu (e-Okul, Koza ERP vb.)</p>
+      </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer id="iletisim" class="py-16 border-t border-white/10 bg-black/30">
+  <footer id="iletisim" class="py-16 border-t border-white/10 bg-black/40 z-10 relative">
     <div class="max-w-7xl mx-auto px-5 text-center">
-      <h4 class="font-display text-2xl md:text-3xl font-bold text-orange-400">Ezber değil, gelişim.</h4>
-      <p class="text-white/70 mt-2">Veriyle öğrenen bir nesil.</p>
-      <div class="mt-6 grid sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
-        <div class="card p-3">Haluk Şakir Ekinci</div>
-        <div class="card p-3">hseekinci@gmail.com</div>
-        <div class="card p-3">haluksakirekinci.com.tr</div>
+      <h4 class="font-display text-2xl md:text-3xl font-bold text-orange-400" data-aos="fade-up">Ezber değil, gelişim.</h4>
+      <p class="text-white/70 mt-2" data-aos="fade-up" data-aos-delay="100">Değerlendirme değil, rehberlik. Veriyle öğrenen bir nesil.</p>
+      <div class="mt-6 grid sm:grid-cols-3 gap-3 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+        <div class="glass p-3 rounded-xl">Haluk Şakir Ekinci</div>
+        <div class="glass p-3 rounded-xl">hseekinci@gmail.com</div>
+        <div class="glass p-3 rounded-xl">haluksakirekinci.com.tr</div>
       </div>
       <p class="text-white/50 text-sm mt-8">© 2025 — Ekinci Software Solutions</p>
     </div>
   </footer>
 
+  <!-- Soru Havuzu Modal -->
+  <div id="poolModal" class="modal">
+    <div class="backdrop" id="closePool"></div>
+    <div class="modal-card glass rounded-2xl p-5 max-w-2xl w-[90%]">
+      <div class="flex items-center justify-between">
+        <h4 class="font-display text-xl font-bold text-orange-400">Soru Havuzu</h4>
+        <button id="xPool" class="tag hover:bg-white/10">Kapat</button>
+      </div>
+      <p class="text-white/70 text-sm mt-1">Konuya uygun soruları seç ve denemeye ekle.</p>
+      <div class="divider my-3"></div>
+
+      <div class="grid sm:grid-cols-2 gap-3 text-sm">
+        <label class="flex items-start gap-2"><input type="checkbox" class="mt-1" value="ÜS-101"><span>ÜS-101: Üslü ifadelerde temel kurallar</span></label>
+        <label class="flex items-start gap-2"><input type="checkbox" class="mt-1" value="ÜS-102"><span>ÜS-102: Negatif üsler ve sadeleştirme</span></label>
+        <label class="flex items-start gap-2"><input type="checkbox" class="mt-1" value="ÜS-201"><span>ÜS-201: Üslü denklemler</span></label>
+        <label class="flex items-start gap-2"><input type="checkbox" class="mt-1" value="OL-101"><span>OL-101: Basit olasılık</span></label>
+        <label class="flex items-start gap-2"><input type="checkbox" class="mt-1" value="ES-101"><span>ES-101: Temel eşitsizlikler</span></label>
+        <label class="flex items-start gap-2"><input type="checkbox" class="mt-1" value="TR-101"><span>TR-101: Trigonometride oranlar</span></label>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <button id="addSelected" class="btn">Seçilenleri Ekle</button>
+        <button id="closeBtn" class="btn" style="background:#6B7280">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Bildirim</div>
+
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init({ once:true, duration:700, easing:"ease-out" });</script>
+  <script>
+    AOS.init({ once:true, duration:700, easing:"ease-out" });
+
+    // ---------- tsParticles ----------
+    let particlesInstance = null;
+    const defaultDensity = 40;
+    const densitySlider = document.getElementById('density');
+    const densityValue = document.getElementById('densityValue');
+
+    async function loadParticles(density=defaultDensity){
+      particlesInstance = await tsParticles.load({
+        id: "tsparticles",
+        options: {
+          background: { color: "transparent" },
+          fpsLimit: 60,
+          particles: {
+            number: { value: density, density: { enable: true, area: 800 } },
+            color: { value: ["#FF8C00", "#ffffff"] },
+            links: { enable: true, color: "#ffffff", distance: 130, opacity: 0.2, width: 1 },
+            move: { enable: true, speed: 1.2, outModes: { default: "bounce" } },
+            opacity: { value: 0.5 },
+            size: { value: { min: 1, max: 3 } }
+          },
+          interactivity: {
+            events: { onHover: { enable: true, mode: "grab" }, resize: true },
+            modes: { grab: { distance: 160, links: { opacity: 0.35 } } }
+          },
+          detectRetina: true
+        }
+      });
+    }
+    loadParticles(defaultDensity);
+
+    densitySlider.addEventListener('input', async (e)=>{
+      const v = +e.target.value;
+      densityValue.textContent = v;
+      if(particlesInstance){
+        await particlesInstance.load({
+          particles: {
+            number: { value: v, density: { enable: true, area: 800 } }
+          }
+        });
+      }
+    });
+
+    // ---------- Toast ----------
+    function toast(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'), 1800);
+    }
+
+    // ---------- Öğrenci: Zamanlayıcı ----------
+    let timerInterval=null, seconds=0;
+    const timerEl = document.getElementById('timer');
+    const startBtn = document.getElementById('startTimer');
+    const pauseBtn = document.getElementById('pauseTimer');
+    const resetBtn = document.getElementById('resetTimer');
+
+    function renderTime(){
+      const m = String(Math.floor(seconds/60)).padStart(2,'0');
+      const s = String(seconds%60).padStart(2,'0');
+      timerEl.textContent = `${m}:${s}`;
+    }
+    startBtn.onclick = ()=>{
+      if(timerInterval) return;
+      timerInterval = setInterval(()=>{ seconds++; renderTime(); }, 1000);
+    };
+    pauseBtn.onclick = ()=>{
+      clearInterval(timerInterval); timerInterval=null;
+    };
+    resetBtn.onclick = ()=>{
+      seconds=0; renderTime(); clearInterval(timerInterval); timerInterval=null;
+    };
+    renderTime();
+
+    // ---------- Öğrenci: 20 soruluk grid ----------
+    const grid = document.getElementById('testGrid');
+    for(let i=1;i<=20;i++){
+      const d = document.createElement('div');
+      d.className='p-2 border border-white/10 rounded-lg cursor-pointer hover:bg-white/10 text-center select-none';
+      d.textContent=i;
+      d.onclick=()=>{
+        if(d.classList.contains('bg-green-600/50')){
+          d.classList.remove('bg-green-600/50','border-green-500');
+          d.classList.add('bg-red-600/40','border-red-500');
+        } else if(d.classList.contains('bg-red-600/40')){
+          d.classList.remove('bg-red-600/40','border-red-500');
+        } else {
+          d.classList.add('bg-green-600/50','border-green-500');
+        }
+      };
+      grid.appendChild(d);
+    }
+
+    // ---------- Öğretmen: Soru havuzu modal ----------
+    const poolModal = document.getElementById('poolModal');
+    document.getElementById('openPool').onclick = ()=> poolModal.classList.add('open');
+    document.getElementById('closePool').onclick = ()=> poolModal.classList.remove('open');
+    document.getElementById('closeBtn').onclick = ()=> poolModal.classList.remove('open');
+    document.getElementById('xPool').onclick = ()=> poolModal.classList.remove('open');
+
+    document.getElementById('addSelected').onclick = ()=>{
+      const checked = Array.from(poolModal.querySelectorAll('input[type=checkbox]:checked')).map(i=>i.value);
+      poolModal.classList.remove('open');
+      if(checked.length) toast(`${checked.length} soru eklendi ✅`);
+      else toast('Seçim yapılmadı');
+    };
+
+    // ---------- Chart.js ----------
+    // Öğretmen bar
+    new Chart(document.getElementById('teacherChart'),{
+      type:'bar',
+      data:{labels:['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10'],
+        datasets:[{data:[62,74,58,80,69,77,65,81,70,75], backgroundColor:'rgba(255,140,0,.7)'}]},
+      options:{plugins:{legend:{display:false}}, scales:{x:{ticks:{color:'white'}}, y:{ticks:{color:'white'}, max:100}}}
+    });
+
+    // Öğrenci radar
+    new Chart(document.getElementById('radarChart'),{
+      type:'radar',
+      data:{labels:['Üslü','Olasılık','Eşitsizlik','Polinom','Trig.'],
+        datasets:[{data:[60,80,55,68,70], backgroundColor:'rgba(255,140,0,.2)', borderColor:'rgba(255,140,0,.8)'}]},
+      options:{plugins:{legend:{display:false}}, scales:{r:{pointLabels:{color:'white'}, grid:{color:'rgba(255,255,255,.1)'}, ticks:{display:false, max:100}}}}
+    });
+
+    // Veli line (hafta filtresi)
+    const lineCtx = document.getElementById('lineChart');
+    const weekFilter = document.getElementById('weekFilter');
+    const genWeeks = (n)=> Array.from({length:n},(_,i)=>`Hafta ${i+1}`);
+    const genData = (n)=> {
+      const base = 45; const step = 55/n;
+      return Array.from({length:n},(_,i)=> Math.min(95, Math.round(base + i*step + Math.random()*5)));
+    };
+    let lineChart = new Chart(lineCtx, {
+      type:'line',
+      data:{labels:genWeeks(4), datasets:[{data:genData(4), borderColor:'rgba(255,140,0,.9)', backgroundColor:'rgba(255,140,0,.2)', fill:true, tension:.3}]},
+      options:{plugins:{legend:{display:false}}, scales:{x:{ticks:{color:'white'}}, y:{ticks:{color:'white'}, max:100}}}
+    });
+
+    weekFilter.onchange = (e)=>{
+      const n = +e.target.value;
+      lineChart.data.labels = genWeeks(n);
+      lineChart.data.datasets[0].data = genData(n);
+      lineChart.update();
+    };
+  </script>
 </body>
 </html>
