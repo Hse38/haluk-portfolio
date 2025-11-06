@@ -8,6 +8,14 @@
   <meta name="keywords" content="Haluk Şakir Ekinci, ERP, yazılım, otomasyon, T3 Vakfı, Python, Django, Flutter, Tailwind, yazılım geliştirici, developer, portfolio, software engineer">
   <meta name="author" content="Haluk Şakir Ekinci">
   <meta name="description" content="Haluk Şakir Ekinci — CV, projeler ve iletişim." />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HBWYC5L7VN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HBWYC5L7VN');
+  </script>
   <link rel="icon" href="assets/favicon.png" alt="Haluk Şakir Ekinci logo"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -79,10 +87,17 @@
       <div class="prose prose-gray dark:prose-invert max-w-none" id="aboutText"></div>
     </section>
   </main>
-  <!-- === BENİMLE TANIŞ MODAL === -->
   <div class="text-center mt-12">
-    <button id="aboutBtn" class="btn-primary">Benimle Tanış</button>
+    <div class="flex justify-center gap-4 flex-wrap">
+      <button id="aboutBtn" class="btn-primary">Benimle Tanış</button>
+      <button id="customizeBtn"
+        class="bg-purple-600 text-white px-5 py-3 rounded-xl shadow-lg hover:scale-105 transition">
+        🎨 Siteyi Özelleştir
+      </button>
+    </div>
   </div>
+
+  
 
   <div id="aboutModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 transition-opacity duration-500">
     <div class="modal-box bg-white dark:bg-gray-900 p-6 rounded-2xl w-80 text-center transform scale-95 opacity-0 transition-all duration-300">

@@ -224,3 +224,31 @@ html {
   backdrop-filter: blur(6px);
   transition: opacity 0.3s ease;
 }
+
+#customizeBtn:hover, #feedbackBtn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+#customizerPopup > div {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+#customizerPopup.opacity-100 > div {
+  transform: translateY(0);
+  opacity: 1;
+}
+#cutomerizerPopup.opacity-100 {
+  opacity: 1;
+  visibility: visible;
+}  
+
+body {
+  padding-top: 80px; /* header yüksekliği kadar boşluk bırak */
+}
+/* --- SCROLL HEADER GEÇİŞ EFEKTİ --- */
+header {
+  transition: transform 0.4s ease;
+}

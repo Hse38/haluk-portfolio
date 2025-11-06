@@ -103,3 +103,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+
+<script>
+  // 🔹 Scroll'da header gizle/göster
+  let lastScroll = 0;
+  const header = document.querySelector("header");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset;
+
+    // sayfayı aşağı kaydırıyorsan ve belirli eşiği geçtiysen -> gizle
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      header.style.transform = "translateY(-100%)";
+    } 
+    // yukarı kaydırıyorsan -> göster
+    else {
+      header.style.transform = "translateY(0)";
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+

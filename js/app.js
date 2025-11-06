@@ -144,3 +144,45 @@ if (modal) {
     setTimeout(() => modal.classList.add("hidden"), 300);
   });
 }
+// 💬 Geri Bildirim Pop-up Script
+document.addEventListener("DOMContentLoaded", () => {
+  const popup = document.getElementById("feedbackPopup");
+  const btn = document.getElementById("feedbackBtn");
+  const closeBtn = document.getElementById("closeFeedback");
+  const sendBtn = document.getElementById("sendFeedback");
+  const statusText = document.getElementById("feedbackStatus");
+
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    popup.classList.remove("invisible", "opacity-0");
+    popup.classList.add("opacity-100");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    popup.classList.add("opacity-0");
+    setTimeout(() => popup.classList.add("invisible"), 300);
+  });
+
+  sendBtn.addEventListener("click", () => {
+    const text = document.getElementById("feedbackText").value.trim();
+    if (!text) return alert("Lütfen bir öneri yazın.");
+    
+    const all = JSON.parse(localStorage.getItem("feedbacks") || "[]");
+    all.push({ text, date: new Date().toLocaleString() });
+    localStorage.setItem("feedbacks", JSON.stringify(all));
+    
+    statusText.classList.remove("hidden");
+    document.getElementById("feedbackText").value = "";
+    setTimeout(() => statusText.classList.add("hidden"), 3000);
+  });
+});
+
+closeBtn.addEventListener("click", () => {
+  popup.querySelector("div").style.transform = "scale(0.9)";
+  popup.classList.add("opacity-0");
+  setTimeout(() => {
+    popup.classList.add("invisible");
+    popup.querySelector("div").style.transform = "scale(1)";
+  }, 300);
+});
