@@ -135,15 +135,318 @@ window.addEventListener('scroll', () => {
 const modal = document.getElementById("aboutModal");
 if (modal) {
   const modalBox = modal.querySelector(".modal-box");
-  document.getElementById("aboutBtn").addEventListener("click", () => {
+  const aboutBtn = document.getElementById("aboutBtn");
+  const closeBtn = document.getElementById("closeModal");
+
+  // Chat alanı referansları
+  //const chatBox = document.getElementById("chatBox");
+  const msg = document.getElementById("msg");
+  const send = document.getElementById("send");
+
+  // === Chat Fonksiyonları ===
+  function append(text, who = "bot") {
+    if (!chatBox) return;
+    const p = document.createElement("div");
+    p.className = who === "bot" ? "text-gray-200" : "text-blue-300 text-right";
+    p.innerText = text;
+    chatBox.appendChild(p);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function startIntro() {
+    console.log("🎬 startIntro çağrıldı!");
+    if (!window.avatarBubble) return;
+
+    const lines = [
+      "👋 Merhaba! Ben Haluk Şakir Ekinci.",
+      "ERP Sistem Sorumlusu & Yazılım Geliştiricisiyim.",
+      "T3 Vakfı’nda dijital dönüşüm ve süreç optimizasyonu üzerine çalışıyorum.",
+      "“Selam Haluk!” yaz, birlikte deneyelim. 😎"
+    ];
+
+    let i = 0;
+    let activeTimeouts = [];
+
+    // 🔸 Önceki zamanlayıcıları iptal et
+    function clearAllTimeouts() {
+      activeTimeouts.forEach(clearTimeout);
+      activeTimeouts = [];
+    }
+
+    function showLine() {
+      if (!window.avatarBubble) return;
+
+      clearAllTimeouts(); // önceki animasyonu kes
+      const bubble = window.avatarBubble;
+
+      bubble.textContent = lines[i];
+      bubble.style.opacity = "1";
+      bubble.style.transform = "translateY(-10px) scale(1)";
+
+      // 2.3 sn sonra gizle
+      const hideTimer = setTimeout(() => {
+        bubble.style.opacity = "0";
+        bubble.style.transform = "translateY(-25px) scale(0.9)";
+
+        i++;
+        if (i < lines.length) {
+          const nextTimer = setTimeout(showLine, 800); // sıradaki satır
+          activeTimeouts.push(nextTimer);
+        } else {
+          // son satırdan sonra tekrar karşılama
+          const finalTimer = setTimeout(() => {
+            bubble.textContent = "👋 Merhaba, ben Haluk!";
+            bubble.style.opacity = "1";
+            bubble.style.transform = "translateY(-10px) scale(1)";
+            const fadeTimer = setTimeout(() => {
+              bubble.style.opacity = "0";
+              bubble.style.transform = "translateY(-25px) scale(0.9)";
+            }, 2500);
+            activeTimeouts.push(fadeTimer);
+          }, 800);
+          activeTimeouts.push(finalTimer);
+        }
+      }, 2300);
+
+      activeTimeouts.push(hideTimer);
+    }
+
+    showLine();
+  }
+
+
+  // === Modal Açma ===
+  aboutBtn.addEventListener("click", () => {
     modal.classList.remove("hidden");
     setTimeout(() => modalBox.classList.add("scale-100", "opacity-100"), 50);
   });
-  document.getElementById("closeModal").addEventListener("click", () => {
+
+  // === Modal Kapatma ===
+  closeBtn.addEventListener("click", () => {
     modalBox.classList.remove("scale-100", "opacity-100");
     setTimeout(() => modal.classList.add("hidden"), 300);
   });
+
+  send?.addEventListener("click", () => {
+    if (!window.avatarBubble) return;
+    const t = msg.value.trim();
+    if (!t) return;
+    msg.value = "";
+
+    // Ziyaretçi mesajını balon olarak göster
+    if (window.avatarBubble) {
+      avatarBubble.textContent = t;
+      avatarBubble.style.opacity = "1";
+      avatarBubble.style.transform = "translateY(-10px) scale(1)";
+      setTimeout(() => {
+        avatarBubble.style.opacity = "0";
+        avatarBubble.style.transform = "translateY(-25px) scale(0.9)";
+      }, 2000);
+    }
+
+    const low = t.toLowerCase();
+    let response = "";
+    if (low.includes("selam") || low.includes("merhaba")) {
+      response = "👋 El sallıyorum! Kamerayı açarsan yüzümü de takip edebilirim.";
+    } else if (low.includes("ne yapıyorsun") || low.includes("ne iş")) {
+      response = "ERP, süreç otomasyonu ve yazılım geliştirme üzerine çalışıyorum.";
+    } else if (low.includes("iletişim")) {
+      response = "LinkedIn: linkedin.com/in/haluksakirekinci veya mail: info@haluksakirekinci.com.tr";
+    } else {
+      response = "Harika soru! Biraz daha detay verir misin?";
+    }
+
+    // Yanıt da balon olarak gösterilsin
+    setTimeout(() => {
+      if (window.avatarBubble) {
+        avatarBubble.textContent = response;
+        avatarBubble.style.opacity = "1";
+        avatarBubble.style.transform = "translateY(-10px) scale(1)";
+        setTimeout(() => {
+          avatarBubble.style.opacity = "0";
+          avatarBubble.style.transform = "translateY(-25px) scale(0.9)";
+        }, 2500);
+      }
+    }, 1000);
+  });
+
+
+  // Enter tuşuyla da gönderme desteği
+  msg?.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") send.click();
+  }); 
 }
+
+// === 3D Avatar: modal açıldığında başlat ===
+let avatarBooted = false;
+
+function initAvatar3D() {
+  if (avatarBooted) return;
+  const canvas = document.getElementById("avatarCanvas");
+  if (!canvas) return;
+
+  // === 💬 Baloncuk ===
+  const bubble = document.createElement("div");
+  bubble.style.position = "absolute";
+  bubble.style.maxWidth = "80vw"; // ekrana taşma olmasın
+  bubble.style.wordWrap = "break-word";
+  bubble.style.padding = "10px 14px";
+  bubble.style.background = "linear-gradient(90deg, #004aad, #007aff)";
+  bubble.style.borderRadius = "16px";
+  bubble.style.color = "#fff";
+  bubble.style.fontSize = "14px";
+  bubble.style.fontWeight = "500";
+  bubble.style.boxShadow = "0 4px 12px rgba(0,0,0,0.25)";
+  bubble.style.transition = "all 0.6s cubic-bezier(0.25,0.1,0.25,1)";
+  bubble.style.opacity = "0";
+  bubble.style.pointerEvents = "none";
+  bubble.style.zIndex = "9999";
+  bubble.style.transform = "translateY(0px) scale(0.9)";
+  bubble.style.whiteSpace = "normal";
+  bubble.style.wordBreak = "break-word";
+  bubble.style.textAlign = "center";
+  bubble.style.userSelect = "none";
+  bubble.style.filter = "drop-shadow(0 2px 6px rgba(0,0,0,0.4))";
+
+  const tail = document.createElement("div");
+  tail.style.position = "absolute";
+  tail.style.bottom = "-8px";
+  tail.style.left = "40%";
+  tail.style.transform = "translateX(-50%)";
+  tail.style.width = "0";
+  tail.style.height = "0";
+  tail.style.borderLeft = "6px solid transparent";
+  tail.style.borderRight = "6px solid transparent";
+  tail.style.borderTop = "8px solid #0066ff";
+  bubble.appendChild(tail);
+
+  document.body.appendChild(bubble);
+  window.avatarBubble = bubble;
+
+  // === THREE.js Kurulumu ===
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / 400, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio || 1);
+
+  function resize() {
+    const w = canvas.clientWidth || 600;
+    const h = 400;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  camera.position.set(0, 1.6, 3);
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 0.8));
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.4);
+  dirLight.position.set(0, 1.5, 2);
+  scene.add(dirLight);
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableZoom = false;
+  controls.enablePan = false;
+  controls.enableRotate = false; // 🚫 Sürükleme ile döndürmeyi kapat
+  controls.target.set(0, 1.0, 0);
+
+  const loader = new THREE.GLTFLoader();
+  loader.load(
+    "https://models.readyplayer.me/690ccff8de516bcc96bc3a60.glb",
+    (gltf) => {
+      const model = gltf.scene;
+      model.position.set(0, -1.5, 0);
+      model.scale.set(1.5, 1.5, 1.5);
+      scene.add(model);
+
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener("mousemove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+        mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+      });
+
+      function updateBubblePosition() {
+        if (!window.avatarBubble || !camera) return;
+        const rect = canvas.getBoundingClientRect();
+
+        // Modelin kafasının biraz sol tarafına hizala
+        const vector = new THREE.Vector3(-0.25, 1.9, 0); // 🧠 sola kaydırdık
+        vector.project(camera);
+
+        const x = (vector.x * 0.5 + 0.5) * rect.width;
+        const y = (-vector.y * 0.5 + 0.5) * rect.height;
+
+        // 🔥 Balonu sola ve yukarıya net offset ile taşıyoruz
+        const offsetX = -window.avatarBubble.offsetWidth * 0.9;  // sola
+        const offsetY = + 90;  // yukarı
+
+        const bubbleX = rect.left + x - window.avatarBubble.offsetWidth * 0.6;
+        window.avatarBubble.style.left = `${Math.max(10, Math.min(window.innerWidth - bubble.offsetWidth - 10, bubbleX))}px`;
+        window.avatarBubble.style.top = `${window.scrollY + rect.top + y + offsetY}px`;
+      }
+
+      // === Animasyon ===
+      let t = 0;
+      function animate() {
+        t += 0.02;
+        // 🎯 Fare takibini yavaşlatılmış ve yumuşatılmış hale getir
+        const targetRotY = mouseX * 0.2;  // daha yavaş dönüş
+        const targetRotX = mouseY * 0.1;
+
+        model.rotation.y += (targetRotY - model.rotation.y) * 0.05; // smooth easing
+        model.rotation.x += (targetRotX - model.rotation.x) * 0.05;
+        model.position.y = Math.sin(t) * 0.03 - 1.5;
+        renderer.render(scene, camera);
+        updateBubblePosition();
+
+        // intro başlatma
+        if (typeof startIntro === "function" && !window._introStarted) {
+          console.log("🟢 Intro başlatılıyor...");
+          window._introStarted = true;
+          startIntro();
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+
+      // === Başlangıç Balonu ===
+      bubble.textContent = "👋 Merhaba, ben Haluk!";
+      bubble.style.opacity = "1";
+      bubble.style.transform = "translateY(-10px) scale(1)";
+      setTimeout(() => {
+        bubble.style.opacity = "0";
+        bubble.style.transform = "translateY(-25px) scale(0.9)";
+      }, 2500);
+    },
+    undefined,
+    (err) => console.error("GLTF yüklenemedi:", err)
+  );
+
+  avatarBooted = true;
+}
+
+// === Modal açıldığında 3D avatarı başlat ===
+(function hookModalOpen() {
+  const aboutBtn = document.getElementById("aboutBtn");
+  const modal = document.getElementById("aboutModal");
+  const closeBtn = document.getElementById("closeModal");
+
+  if (!aboutBtn || !modal || !closeBtn) return;
+
+  aboutBtn.addEventListener("click", () => {
+    console.log("🎯 Modal açıldı, 3D avatar başlatılıyor...");
+    if (!window.avatarBooted) {
+      setTimeout(initAvatar3D, 200);
+    }
+  });
+})();
+
 // 💬 Geri Bildirim Pop-up Script
 document.addEventListener("DOMContentLoaded", () => {
   const popup = document.getElementById("feedbackPopup");
@@ -178,11 +481,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-closeBtn.addEventListener("click", () => {
-  popup.querySelector("div").style.transform = "scale(0.9)";
-  popup.classList.add("opacity-0");
-  setTimeout(() => {
-    popup.classList.add("invisible");
-    popup.querySelector("div").style.transform = "scale(1)";
-  }, 300);
-});
+// 💬 Geri Bildirim Pop-up Kapatma
+const closeFeedbackBtn = document.getElementById("closeFeedback");
+const popup = document.getElementById("feedbackPopup");
+
+if (closeFeedbackBtn && popup) {
+  closeFeedbackBtn.addEventListener("click", () => {
+    const inner = popup.querySelector("div");
+    if (!inner) return;
+    inner.style.transform = "scale(0.9)";
+    popup.classList.add("opacity-0");
+    setTimeout(() => {
+      popup.classList.add("invisible");
+      inner.style.transform = "scale(1)";
+    }, 300);
+  });
+}

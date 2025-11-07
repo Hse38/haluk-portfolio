@@ -165,13 +165,14 @@ window.addEventListener("scroll", () => {
   const currentScroll = window.pageYOffset;
 
   // aşağı kaydır -> gizle
-  if (currentScroll > lastScroll && currentScroll > 80) {
+  if (header && currentScroll > lastScroll && currentScroll > 80) {
     header.style.transform = "translateY(-100%)";
-  } 
-  // yukarı kaydır -> göster
-  else {
+  }
+   // yukarı kaydır -> göster
+  else if (header) {
     header.style.transform = "translateY(0)";
   }
+
 
   lastScroll = currentScroll;
 });
