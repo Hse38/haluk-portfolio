@@ -176,3 +176,12 @@ window.addEventListener("scroll", () => {
 
   lastScroll = currentScroll;
 });
+
+// Header ve footer’ı dinamik yükler
+fetch("partials/header.html")
+  .then(r => r.text())
+  .then(h => document.getElementById("header-placeholder").innerHTML = h);
+
+fetch("partials/footer.html")
+  .then(r => r.text())
+  .then(f => document.getElementById("footer-placeholder")?.innerHTML = f);

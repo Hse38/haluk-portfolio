@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Etkinlik & Kampanya Sitesi | Ekinci Teknoloji</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      background: linear-gradient(-45deg, #3b0764, #5b21b6, #9333ea, #7e22ce);
+      background-size: 400% 400%;
+      animation: gradientFlow 10s ease infinite;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    header {
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #f0abfc, #c084fc, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: float 4s ease-in-out infinite alternate;
+      text-shadow: 0 0 30px rgba(168,85,247,0.6);
+    }
+    @keyframes float { 0% { transform: translateY(0px); } 100% { transform: translateY(-15px); } }
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .time-box h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #e9d5ff;
+      text-shadow: 0 0 15px rgba(216,180,254,0.6);
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, #9333ea, #7e22ce);
+      border-radius: 14px;
+      padding: 1rem 2rem;
+      color: white;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 25px rgba(147,51,234,0.4);
+    }
+    .btn-primary:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #a855f7, #9333ea);
+      box-shadow: 0 0 35px rgba(168,85,247,0.7);
+    }
+    .fade-up { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    input, textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.8rem;
+      border-radius: 10px;
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+    input:focus, textarea:focus {
+      border-color: #c084fc;
+      box-shadow: 0 0 10px rgba(192,132,252,0.4);
+      outline: none;
+    }
+    footer {
+      background: rgba(0,0,0,0.3);
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #d8b4fe;
+    }
+
+    /* === MODAL (Ticket) === */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .ticket {
+      background: radial-gradient(circle at top left, #5b21b6, #3b0764);
+      padding: 2rem;
+      border-radius: 20px;
+      width: 350px;
+      text-align: center;
+      color: #f3e8ff;
+      box-shadow: 0 0 40px rgba(168,85,247,0.5);
+      position: relative;
+      transform: scale(0.7);
+      opacity: 0;
+      animation: ticketPop 0.8s forwards ease;
+    }
+    @keyframes ticketPop {
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .ticket::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      border: 2px dashed rgba(255,255,255,0.3);
+      pointer-events: none;
+    }
+
+    .blink {
+      animation: blink 1s infinite alternate;
+    }
+    @keyframes blink { from { opacity: 0.5; } to { opacity: 1; } }
+
+  </style>
+</head>
+<body>
+
+  <header class="fixed top-0 w-full z-50 py-4">
+    <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+      <h1 class="font-bold text-xl text-purple-300">🎆 Future Vision</h1>
+      <nav class="space-x-6 text-sm text-gray-200">
+        <a href="#about" class="hover:text-white">Hakkında</a>
+        <a href="#register" class="hover:text-white">Kayıt</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1 class="fade-up">Future Vision 2025</h1>
+    <p class="fade-up">Türkiye'nin en ilham verici teknoloji etkinliği başlamak üzere.</p>
+    <div class="countdown fade-up">
+      <div class="time-box"><h2 id="days">00</h2><p>Gün</p></div>
+      <div class="time-box"><h2 id="hours">00</h2><p>Saat</p></div>
+      <div class="time-box"><h2 id="minutes">00</h2><p>Dakika</p></div>
+      <div class="time-box"><h2 id="seconds">00</h2><p>Saniye</p></div>
+    </div>
+    <a href="#register" class="btn-primary fade-up">Kayıt Ol</a>
+  </section>
+
+  <section id="about" class="fade-up py-24 text-center max-w-4xl mx-auto">
+    <h2 class="text-4xl font-bold mb-4">Etkinlik Hakkında</h2>
+    <p class="text-gray-200 text-lg leading-relaxed">
+      Future Vision 2025; inovasyon, sürdürülebilirlik ve yapay zekâ temalarıyla geleceği şekillendiren fikirleri bir araya getiriyor.
+    </p>
+  </section>
+
+  <section id="register" class="fade-up py-24 bg-[#2e1065] text-center">
+    <h2 class="text-3xl font-bold mb-6">Ücretsiz Katılım</h2>
+    <p class="text-gray-300 mb-6">Formu doldurun, biletiniz anında oluşsun 🎟️</p>
+
+    <form id="registerForm" class="max-w-md mx-auto text-left px-4">
+      <input type="text" id="name" placeholder="Ad Soyad" required />
+      <input type="email" id="email" placeholder="E-posta Adresi" required />
+      <button type="submit" class="btn-primary w-full">Bilet Oluştur</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Ekinci Teknoloji | Etkinlik ve Kampanya Sayfası</p>
+  </footer>
+
+  <!-- MODAL -->
+  <div id="ticketModal" class="modal">
+    <div class="ticket">
+      <h2 class="text-2xl font-bold mb-2">🎫 Etkinlik Biletiniz</h2>
+      <p id="ticketName" class="text-lg mb-4"></p>
+      <p class="blink text-green-400 font-semibold">✅ Giriş Onaylandı</p>
+      <div class="mt-6 flex justify-center gap-4">
+        <button id="closeModal" class="btn-primary px-4 py-2">Kapat</button>
+        <button class="bg-white/20 px-4 py-2 rounded-xl border border-white/30 hover:bg-white/30 transition">PDF İndir</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // === Scroll animation ===
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
+
+    // === Countdown ===
+    const countdown = () => {
+      const eventDate = new Date("2025-12-31T00:00:00").getTime();
+      const now = new Date().getTime();
+      const diff = eventDate - now;
+      if (diff <= 0) return;
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+      document.getElementById("days").textContent = d;
+      document.getElementById("hours").textContent = h;
+      document.getElementById("minutes").textContent = m;
+      document.getElementById("seconds").textContent = s;
+    };
+    setInterval(countdown, 1000);
+
+    // === Ticket Modal ===
+    const form = document.getElementById("registerForm");
+    const modal = document.getElementById("ticketModal");
+    const closeModal = document.getElementById("closeModal");
+    const ticketName = document.getElementById("ticketName");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      if (!name) return;
+      ticketName.textContent = name;
+      modal.style.display = "flex";
+    });
+
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>

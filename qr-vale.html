@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR-Kodlu Vale Otomasyon Sistemi | Haluk Şakir Ekinci</title>
+  <link rel="stylesheet" href="css/site.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-[#0a0c10] text-white font-sans">
+
+  <!-- HEADER -->
+  <div id="header"></div>
+
+  <!-- HERO -->
+  <section class="text-center py-20 bg-gradient-to-b from-gray-900 to-gray-950 border-b border-gray-800">
+    <h1 class="text-4xl font-bold mb-4">🚗 QR-Kodlu Vale Otomasyon Sistemi</h1>
+    <p class="text-gray-400 max-w-3xl mx-auto text-lg">
+      Restoran ve otellerde araç hazırlama ve çağırma süreçlerini dijitalleştiren, 
+      zamanlayıcı ve bildirim destekli sistem.
+    </p>
+
+    <div class="flex justify-center gap-3 mt-6">
+      <span class="px-3 py-1 text-sm bg-orange-500/20 text-orange-400 rounded-full">Django</span>
+      <span class="px-3 py-1 text-sm bg-blue-500/20 text-blue-400 rounded-full">Tailwind</span>
+      <span class="px-3 py-1 text-sm bg-green-500/20 text-green-400 rounded-full">WebSocket</span>
+      <span class="px-3 py-1 text-sm bg-purple-500/20 text-purple-400 rounded-full">Automation</span>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <main class="max-w-7xl mx-auto p-8" id="qrvale-demo">
+    <!-- JavaScript burayı dinamik olarak dolduruyor -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-center py-10 text-gray-400 bg-gray-950 border-t border-gray-800">
+    <a href="projects.html" class="text-orange-400 hover:underline">← Tüm Projeler</a>
+  </footer>
+
+  <!-- HEADER YÜKLEME -->
+  <script>
+    fetch("partials/header.html")
+      .then(r => r.text())
+      .then(h => (document.getElementById("header").innerHTML = h));
+  </script>
+
+  <!-- ANA DEMO -->
+  <script src="js/qr-vale-demo.js"></script>
+
+</body>
+</html>

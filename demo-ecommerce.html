@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Ticaret Sitesi | Ekinci Teknoloji</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      background: linear-gradient(-45deg,#0f172a,#0a2540,#1e3a8a,#1d4ed8);
+      background-size:400% 400%;
+      animation:gradientFlow 10s ease infinite;
+    }
+    @keyframes gradientFlow{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    header{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.1);}
+    .fade-up{opacity:0;transform:translateY(50px);transition:all 1s ease-out;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+    .btn-primary{
+      background:linear-gradient(90deg,#6366f1,#8b5cf6);
+      border-radius:12px;padding:1rem 2rem;
+      font-weight:600;color:white;
+      transition:all .3s ease;
+      box-shadow:0 0 25px rgba(139,92,246,.4);
+    }
+    .btn-primary:hover{transform:scale(1.05);box-shadow:0 0 35px rgba(139,92,246,.6);}
+    .product-card{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:1rem;overflow:hidden;
+      transition:all .4s ease;
+    }
+    .product-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 0 25px rgba(96,165,250,.4);}
+    .cart-popup{
+      position:fixed;bottom:30px;right:30px;
+      background:linear-gradient(135deg,#1e3a8a,#3b82f6);
+      padding:1.2rem 2rem;border-radius:1rem;
+      box-shadow:0 0 25px rgba(37,99,235,.5);
+      display:none;animation:pop .4s ease forwards;z-index:50;
+    }
+    @keyframes pop{0%{transform:scale(.8);opacity:0;}100%{transform:scale(1);opacity:1;}}
+    /* --- MODAL --- */
+    .modal{
+      display:none;position:fixed;inset:0;
+      background:rgba(0,0,0,.7);backdrop-filter:blur(8px);
+      justify-content:center;align-items:center;z-index:100;
+    }
+    .modal-content{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:20px;
+      padding:2rem 2.5rem;text-align:center;
+      width:360px;
+      box-shadow:0 0 40px rgba(96,165,250,.4);
+      animation:scaleIn .6s ease forwards;
+    }
+    @keyframes scaleIn{from{transform:scale(.8);opacity:0;}to{transform:scale(1);opacity:1;}}
+    input{
+      width:100%;background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.2);
+      padding:.8rem;border-radius:10px;
+      color:white;margin-bottom:1rem;font-size:.95rem;
+      transition:.3s;
+    }
+    input:focus{border-color:#60a5fa;box-shadow:0 0 10px rgba(96,165,250,.4);outline:none;}
+    /* success */
+    .success{
+      background:radial-gradient(circle at top,#16a34a,#14532d);
+      padding:2rem;border-radius:20px;width:340px;text-align:center;
+      box-shadow:0 0 30px rgba(22,163,74,.6);
+      animation:fadeSuccess 1s ease forwards;
+    }
+    @keyframes fadeSuccess{0%{opacity:0;transform:scale(.8);}100%{opacity:1;transform:scale(1);}}
+  </style>
+</head>
+<body>
+
+<header class="fixed top-0 w-full z-50 py-4">
+  <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+    <h1 class="font-bold text-xl text-indigo-300">🛍️ E-Ticaret Sitesi</h1>
+    <nav class="space-x-6 text-sm text-gray-300">
+      <a href="#about" class="hover:text-white">Hakkında</a>
+      <a href="#products" class="hover:text-white">Ürünler</a>
+      <a href="#contact" class="hover:text-white">İletişim</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero text-center h-screen flex flex-col justify-center items-center px-6">
+  <h1 class="text-5xl font-extrabold mb-4 fade-up">Modern E-Ticaret Deneyimi</h1>
+  <p class="text-gray-300 text-lg max-w-2xl fade-up">
+    Güçlü altyapı, kullanıcı dostu tasarım ve ödeme entegrasyonlarıyla satışlarınızı artırın.
+  </p>
+  <a href="#products" class="btn-primary mt-8 fade-up">Canlı Önizleme</a>
+</section>
+
+<section id="products" class="py-24 max-w-6xl mx-auto px-6 text-center fade-up">
+  <h2 class="text-4xl font-bold mb-10">Popüler Ürünler</h2>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="product-card p-6">
+      <img src="assets/kulaklık.jpg" class="rounded-lg mb-4"/>
+      <h3 class="text-xl font-semibold mb-2">Kablosuz Kulaklık</h3>
+      <p class="text-gray-300 text-sm mb-4">Yüksek ses kalitesi ve konfor bir arada.</p>
+      <button class="btn-primary w-full add-cart">Sepete Ekle</button>
+    </div>
+    <div class="product-card p-6">
+      <img src="assets/saat.jpg" class="rounded-lg mb-4"/>
+      <h3 class="text-xl font-semibold mb-2">Akıllı Saat</h3>
+      <p class="text-gray-300 text-sm mb-4">Adımlarınızı, nabzınızı ve uykunuzu takip edin.</p>
+      <button class="btn-primary w-full add-cart">Sepete Ekle</button>
+    </div>
+    <div class="product-card p-6">
+      <img src="assets/pc.jpg" class="rounded-lg mb-4"/>
+      <h3 class="text-xl font-semibold mb-2">Ultra Hafif Laptop</h3>
+      <p class="text-gray-300 text-sm mb-4">Taşınabilirlik ve performans bir arada.</p>
+      <button class="btn-primary w-full add-cart">Sepete Ekle</button>
+    </div>
+  </div>
+  <div class="mt-12">
+    <button id="checkoutBtn" class="btn-primary">🛒 Ödeme Yap</button>
+  </div>
+</section>
+
+<section id="contact" class="py-24 bg-[#0a2540] text-center fade-up">
+  <h2 class="text-3xl font-bold mb-4">Bize Ulaşın</h2>
+  <p class="text-gray-300 mb-6">Projeniz için e-ticaret çözümlerimizi keşfedin.</p>
+  <a href="mailto:info@ekinciteknoloji.com" class="btn-primary">İletişime Geç</a>
+</section>
+
+<div id="cartPopup" class="cart-popup">🛒 Ürün sepete eklendi!</div>
+
+<footer class="text-center py-8 text-gray-400 border-t border-white/10">
+  © 2025 Ekinci Teknoloji | E-Ticaret Demo
+</footer>
+
+<!-- ÖDEME MODALI -->
+<div id="paymentModal" class="modal">
+  <div class="modal-content">
+    <h2 class="text-2xl font-bold mb-4">💳 Ödeme Bilgileri</h2>
+    <input type="text" id="cardName" placeholder="Kart Üzerindeki İsim" required />
+    <input type="text" id="cardNumber" placeholder="Kart Numarası" maxlength="16" required />
+    <div class="flex gap-2">
+      <input type="text" placeholder="AA/YY" maxlength="5" class="w-1/2"/>
+      <input type="text" placeholder="CVV" maxlength="3" class="w-1/2"/>
+    </div>
+    <button id="payBtn" class="btn-primary w-full mt-4">Ödemeyi Tamamla</button>
+    <button id="closePayment" class="mt-3 text-gray-300 hover:text-white text-sm">Vazgeç</button>
+  </div>
+</div>
+
+<!-- BAŞARILI MODAL -->
+<div id="successModal" class="modal">
+  <div class="success">
+    <h2 class="text-3xl font-bold mb-2">🎉 Sipariş Başarılı!</h2>
+    <p class="text-gray-200 mb-4">Teşekkürler, siparişiniz alındı.</p>
+    <button id="closeSuccess" class="btn-primary">Tamam</button>
+  </div>
+</div>
+
+<script>
+  // Scroll anim
+  const obs=new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting)i.target.classList.add("visible")})},{threshold:.2});
+  document.querySelectorAll(".fade-up").forEach(el=>obs.observe(el));
+
+  const popup=document.getElementById("cartPopup");
+  document.querySelectorAll(".add-cart").forEach(b=>b.addEventListener("click",()=>{
+    popup.style.display="block";setTimeout(()=>popup.style.display="none",1500);
+  }));
+
+  // ödeme akışı
+  const checkout=document.getElementById("checkoutBtn"),
+        payModal=document.getElementById("paymentModal"),
+        closePay=document.getElementById("closePayment"),
+        payBtn=document.getElementById("payBtn"),
+        success=document.getElementById("successModal"),
+        closeSuccess=document.getElementById("closeSuccess");
+
+  checkout.onclick=()=>payModal.style.display="flex";
+  closePay.onclick=()=>payModal.style.display="none";
+  payBtn.onclick=()=>{
+    payModal.style.display="none";
+    success.style.display="flex";
+  };
+  closeSuccess.onclick=()=>success.style.display="none";
+</script>
+
+</body>
+</html>

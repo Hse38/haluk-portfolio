@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Web Siteleri | Haluk Şakir Ekinci</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: white;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 1s ease;
+    }
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mockup {
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+      transform: perspective(1000px) rotateY(-6deg);
+      transition: all 0.6s ease;
+    }
+    .mockup:hover {
+      transform: perspective(1000px) rotateY(0deg) scale(1.05);
+      box-shadow: 0 0 60px rgba(147, 51, 234, 0.4);
+    }
+
+    .cta-btn {
+      padding: 0.9rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 500;
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+      box-shadow: 0 0 25px rgba(139,92,246,0.5);
+      transition: all 0.4s ease;
+    }
+    .cta-btn:hover {
+      filter: brightness(1.3);
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px rgba(168,85,247,0.8);
+    }
+
+    .light {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(160px);
+      opacity: 0.3;
+      animation: float 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0) translateX(0); }
+      to { transform: translateY(-30px) translateX(30px); }
+    }
+
+    /* ↓ ok animasyonu */
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      animation: pulse 2s infinite ease-in-out;
+      transition: all 0.3s ease;
+    }
+
+    .scroll-down:hover {
+      border-color: white;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    .scroll-down svg {
+      width: 22px;
+      height: 22px;
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 rgba(255,255,255,0.1); }
+      50% { box-shadow: 0 0 25px rgba(255,255,255,0.15); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section id="hero" class="bg-gradient-to-b from-indigo-950 to-black text-center flex-col">
+    <div class="light w-96 h-96 bg-indigo-500 top-1/2 left-1/2 -translate-x-1/2 absolute"></div>
+    <h1 class="text-6xl font-extrabold mb-6 fade">✨ Modern Web Siteleri</h1>
+    <p class="text-gray-300 text-lg max-w-2xl mx-auto fade">
+      İşletmeniz, markanız veya kişisel projeniz için modern, estetik ve etkileyici web tasarımları.
+    </p>
+
+    <div class="scroll-down" onclick="scrollToNext('portfolio')">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- PORTFÖY -->
+  <section id="portfolio" class="bg-gradient-to-b from-indigo-950 to-gray-950">
+    <div class="light w-80 h-80 bg-indigo-400 top-0 left-1/4 absolute"></div>
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 fade">
+      <div class="max-w-lg">
+        <h2 class="text-4xl font-bold mb-4">💼 Portföy Sitesi</h2>
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          Freelancer’lar, sanatçılar ve profesyoneller için kişisel vitrin.
+          Modern animasyonlar, tipografi ve parlayan arka planlarla markanızı yansıtın.
+        </p>
+        <a href="demo-portfolio.html" target="_blank" class="cta-btn">Canlı Önizleme</a>
+      </div>
+      <div class="mockup w-[480px] h-[300px]">
+        <img src="assets/portföy.jpg" class="w-full h-full object-cover" alt="Portföy Sitesi">
+      </div>
+    </div>
+    <div class="scroll-down" onclick="scrollToNext('corporate')">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- KURUMSAL -->
+  <section id="corporate" class="bg-gradient-to-b from-gray-950 to-emerald-950">
+    <div class="light w-80 h-80 bg-emerald-500 top-0 right-1/3 absolute"></div>
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-10 fade">
+      <div class="max-w-lg">
+        <h2 class="text-4xl font-bold mb-4">🏢 Kurumsal Web Sitesi</h2>
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          Firmalar için güven, düzen ve prestij odaklı web çözümleri.
+          Mobil uyumlu, çok dilli ve kurumsal imajınızı yansıtan profesyonel tasarımlar.
+        </p>
+        <a href="demo-corporate.html" target="_blank" class="cta-btn bg-emerald-600 hover:bg-emerald-700">Canlı Önizleme</a>
+      </div>
+      <div class="mockup w-[480px] h-[300px]">
+        <img src="assets/kurumsal.jpg" class="w-full h-full object-cover" alt="Kurumsal Site">
+      </div>
+    </div>
+    <div class="scroll-down" onclick="scrollToNext('event')">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ETKİNLİK -->
+  <section id="event" class="bg-gradient-to-b from-purple-950 to-fuchsia-950">
+    <div class="light w-80 h-80 bg-fuchsia-500 bottom-0 left-1/3 absolute"></div>
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 fade">
+      <div class="max-w-lg">
+        <h2 class="text-4xl font-bold mb-4">🎉 Etkinlik & Kampanya Sitesi</h2>
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          Lansman, yarışma veya kampanyalar için dinamik, dikkat çekici sayfalar.
+          Renk geçişleri, sayaç efektleri ve 3D başlıklarla fark yaratın.
+        </p>
+        <a href="demo-event.html" target="_blank" class="cta-btn bg-fuchsia-600 hover:bg-fuchsia-700">Canlı Önizleme</a>
+      </div>
+      <div class="mockup w-[480px] h-[300px]">
+        <img src="assets/yarisma.jpg" class="w-full h-full object-cover" alt="Etkinlik Sitesi">
+      </div>
+    </div>
+    <div class="scroll-down" onclick="scrollToNext('ecommerce')">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- E-TİCARET -->
+  <section id="ecommerce" class="bg-gradient-to-b from-cyan-950 to-gray-950">
+    <div class="light w-80 h-80 bg-cyan-500 top-1/3 right-1/3 absolute"></div>
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-10 fade">
+      <div class="max-w-lg">
+        <h2 class="text-4xl font-bold mb-4">🛒 E-Ticaret Sitesi</h2>
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          Güçlü altyapı, kullanıcı dostu tasarım ve ödeme entegrasyonlarıyla
+          satışlarınızı artıran, performanslı web çözümleri.
+        </p>
+        <a href="demo-ecommerce.html" target="_blank" class="cta-btn bg-cyan-600 hover:bg-cyan-700">Canlı Önizleme</a>
+      </div>
+      <div class="mockup w-[480px] h-[300px]">
+        <img src="assets/magaza.jpg" class="w-full h-full object-cover" alt="E-Ticaret Sitesi">
+      </div>
+    </div>
+    <div class="scroll-down" onclick="scrollToNext('cta')">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" class="bg-black text-center flex-col">
+    <div class="light w-96 h-96 bg-indigo-600 top-1/2 left-1/2 -translate-x-1/2 absolute"></div>
+    <h2 class="text-4xl font-bold mb-6 fade">🚀 Web Sitenizi Birlikte Tasarlayalım</h2>
+    <p class="text-gray-400 max-w-2xl mx-auto mb-8 fade">
+      Markanız veya projeniz için fark yaratan, modern ve yüksek etki bırakan web deneyimi inşa edelim.
+    </p>
+    <a href="contact.html" class="cta-btn fade">📩 Teklif Al</a>
+  </section>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+    function scrollToNext(nextId) {
+      document.getElementById(nextId).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+  <script>
+    fetch("partials/header.html")
+        .then(r => r.text())
+        .then(h => document.getElementById("header-placeholder").innerHTML = h);
+
+    fetch("partials/footer.html")
+        .then(r => r.text())
+        .then(f => document.getElementById("footer-placeholder").innerHTML = f);
+  </script>
+</body>
+</html>

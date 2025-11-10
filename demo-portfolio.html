@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Portföy Sitesi | Haluk Şakir Ekinci</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #05051a 0%, #0b0b1f 100%);
+      color: #fff;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Fade animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero glow */
+    .hero-bg {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(99,102,241,0.2), transparent 70%);
+      filter: blur(200px);
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: rotate 30s linear infinite;
+    }
+    @keyframes rotate {
+      from { transform: translateX(-50%) rotate(0deg); }
+      to { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    /* Card hover */
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(6px);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(99,102,241,0.3);
+      border-color: rgba(99,102,241,0.5);
+    }
+
+    /* Scroll arrow */
+    .scroll-down {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    footer {
+      background: linear-gradient(to right, rgba(99,102,241,0.1), rgba(168,85,247,0.1));
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="fixed top-0 w-full z-50 backdrop-blur-md bg-black/30 border-b border-white/10 py-4">
+    <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+      <h1 class="font-bold text-lg">💎 Haluk Portfolio</h1>
+      <nav class="space-x-6 text-sm text-gray-300">
+        <a href="#about" class="hover:text-indigo-400">Hakkımda</a>
+        <a href="#services" class="hover:text-indigo-400">Hizmetler</a>
+        <a href="#projects" class="hover:text-indigo-400">Projeler</a>
+        <a href="#contact" class="hover:text-indigo-400">İletişim</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative h-screen flex flex-col items-center justify-center text-center">
+    <div class="hero-bg"></div>
+    <h1 class="text-6xl font-extrabold leading-tight fade-up">Modern, Etkileyici ve <span class="text-indigo-400">Dönüştüren</span> Web Siteleri</h1>
+    <p class="text-gray-400 mt-6 text-lg max-w-2xl fade-up">Markanızı dijitale taşıyan, kullanıcı deneyimini ön plana çıkaran tasarımlar.  
+    Tüm sektörler için premium web çözümleri.</p>
+    <a href="#services" class="mt-10 inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-lg transition fade-up">🚀 Projeni Başlatalım</a>
+    <a href="#about" class="scroll-down absolute bottom-10 opacity-70">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-24 text-center fade-up">
+    <h2 class="text-4xl font-bold mb-6">👋 Hakkımda</h2>
+    <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">
+      Her sektöre uygun web deneyimleri tasarlıyorum.  
+      Kullanıcıyı merkeze alan, estetik ve performans odaklı dijital ürünler geliştiriyorum.  
+      Yazılım, tasarım ve etkileşimi bir araya getiriyorum.
+    </p>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-24 bg-gradient-to-b from-gray-900 to-black text-center fade-up">
+    <h2 class="text-4xl font-bold mb-12">💼 Hizmetlerim</h2>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6">
+      <div class="card p-8">
+        <h3 class="text-xl font-semibold mb-3 text-indigo-400">🏢 Kurumsal Siteler</h3>
+        <p class="text-gray-400 text-sm">Markanızın prestijini yansıtan, profesyonel kurumsal web siteleri.</p>
+      </div>
+      <div class="card p-8">
+        <h3 class="text-xl font-semibold mb-3 text-fuchsia-400">🎨 Portföy Siteleri</h3>
+        <p class="text-gray-400 text-sm">Freelancer, sanatçı veya ajanslar için modern ve etkileyici kişisel vitrinler.</p>
+      </div>
+      <div class="card p-8">
+        <h3 class="text-xl font-semibold mb-3 text-cyan-400">🛒 E-Ticaret Siteleri</h3>
+        <p class="text-gray-400 text-sm">Satışlarınızı artıran hızlı, güvenli ve mobil uyumlu e-ticaret çözümleri.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-24 text-center fade-up">
+    <h2 class="text-4xl font-bold mb-10">🚧 Projelerden Örnekler</h2>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6">
+      <div class="card p-4">
+        <img src="assets/Dashboard.jpg" class="rounded-lg mb-4" alt="Demo proje">
+        <h3 class="text-indigo-400 font-semibold">Kurumsal Ajans</h3>
+      </div>
+      <div class="card p-4">
+        <img src="assets/mor.jpg" class="rounded-lg mb-4" alt="Demo proje">
+        <h3 class="text-fuchsia-400 font-semibold">Portföy Tasarımı</h3>
+      </div>
+      <div class="card p-4">
+        <img src="assets/la.jpg" class="rounded-lg mb-4" alt="Demo proje">
+        <h3 class="text-cyan-400 font-semibold">E-Ticaret Platformu</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-24 text-center bg-gradient-to-b from-black to-gray-900 fade-up">
+    <h2 class="text-4xl font-bold mb-4">🤝 Birlikte Çalışalım</h2>
+    <p class="text-gray-400 mb-8">İşinizi büyütmek için birlikte harika bir proje geliştirebiliriz.</p>
+    <a href="mailto:info@haluksakirekinci.com" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-lg transition">📩 İletişime Geç</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 text-center text-gray-400">
+    <p>© 2025 Haluk Şakir Ekinci — Tüm Hakları Saklıdır.</p>
+    <div class="flex justify-center mt-3 space-x-5">
+      <a href="#" class="hover:text-indigo-400">LinkedIn</a>
+      <a href="#" class="hover:text-fuchsia-400">GitHub</a>
+      <a href="#" class="hover:text-cyan-400">Instagram</a>
+    </div>
+  </footer>
+
+  <!-- Animation trigger -->
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

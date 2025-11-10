@@ -133,6 +133,14 @@
   <script src="https://unpkg.com/three@0.140.0/examples/js/controls/OrbitControls.js"></script>
   <script src="js/app.js"></script>
   <script src="js/include.js"></script>
+  <script>
+  fetch("partials/header.html")
+    .then(r => r.text())
+    .then(h => document.getElementById("header-placeholder").innerHTML = h);
 
+  fetch("partials/footer.html")
+    .then(r => r.text())
+    .then(f => document.getElementById("footer-placeholder").innerHTML = f);
+  </script>
 </body>
 </html>

@@ -1,76 +1,45 @@
 {
   "projects": [
     {
-      "title": "QR‑Kod’lu Vale Otomasyon Sistemi",
+      "id": "qrvale",
+      "title": "QR-Kod’lu Vale Otomasyon Sistemi",
       "year": "2025",
-      "description": "Restoran müşterilerinin araç hazırlama/çağırma süreçlerini dijitalleştiren, zamanlayıcı ve bildirim entegrasyonlu sistem.",
-      "tags": [
-        "Django",
-        "WebSocket",
-        "QR",
-        "Tailwind"
-      ],
+      "description": "Restoran müşterilerinin araç hazırlama/çağırma süreçlerini dijitalleştiren sistem.",
+      "tags": ["Django", "WebSocket", "QR", "Tailwind"],
       "image": "assets/valet.png",
-      "link": "",
-      "repo": ""
+      "page": "./qr-vale.html"
     },
     {
-      "title": "Sürücü Kursları Yönetim Paneli",
+      "id": "surucu",
+      "title": "Sürücü Kursu Uygulaması",
       "year": "2025",
-      "description": "Öğrenci takibi, sınav kayıt ve değerlendirme modülleri. React + Django ile yönetim ekranları.",
-      "tags": [
-        "React",
-        "Django",
-        "PostgreSQL"
-      ],
+      "description": "Öğrencilerin ders saatlerini, eğitmenlerini ve sınav haritalarını yöneten interaktif mobil uygulama.",
+      "tags": ["Flutter", "Tailwind", "Simulation"],
       "image": "assets/kurs.png",
-      "link": "",
-      "repo": ""
+      "page": "./surucu-app.html"
     },
     {
-      "title": "Kurumsal Web Siteleri & Paneller",
-      "year": "2024",
-      "description": "Flutter ve React tabanlı yönetim panelleri; canlı saha verisi gösterimi ve raporlama.",
-      "tags": [
-        "Flutter",
-        "React",
-        "CI/CD"
-      ],
-      "image": "assets/web.png",
-      "link": "",
-      "repo": ""
-    },
-    {
+      "id": "ticket",
       "title": "Bilet Talep ve Yönetim Otomasyon Sistemi",
       "year": "2025",
-      "description": "Kurum içi bilet taleplerinin, onay ve satın alma süreçlerinin dijitalleştirildiği entegre bir sistemdir. OTP doğrulama akışı sadeleştirilmiş, işlem güvenliği artırılmıştır. Yetkili kullanıcılar talepleri oluşturabilir, yöneticiler onaylayabilir ve raporlar tek panel üzerinden takip edilebilir.",
-      "tags": [
-        "Django",
-        "Tailwind",
-        "PostgreSQL",
-        "Automation",
-        "Workflow",
-        "OTP"
-      ],
+      "description": "Kurum içi bilet taleplerinin, onay ve satın alma süreçlerinin dijitalleştirildiği sistem.",
+      "tags": ["Django", "Tailwind", "PostgreSQL", "Workflow"],
       "image": "assets/ticket.png",
-      "link": "",
-      "repo": ""
+      "page": "./ticket-app.html"
     },
     {
-      "title": "E-ticaret Altyapılı Siteler",
-      "year": "2024",
-      "description": "Kurumsal markalar ve iç operasyonlar için özelleştirilebilir e-ticaret sistemleri geliştirildi. Ürün yönetimi, sipariş takibi, ödeme altyapısı, depo senkronizasyonu ve kullanıcı yönetimi tek panelde birleştirildi. ERP entegrasyonlarıyla satış ve stok süreçleri tam otomatik hale getirildi.",
-      "tags": [
-        "Django",
-        "React",
-        "Tailwind",
-        "PostgreSQL",
-        "API",
-        "Stripe"
-  ],
-  "image": "assets/besmadde.png",
-  "link": "",
-  "repo": ""
+      "id": "modern-web",
+      "title": "Modern ve Animasyonlu Web Siteleri",
+      "year": "2025",
+      "description": "İş yerleri, markalar ve profesyoneller için tasarlanmış modern, animasyonlu, mobil uyumlu web siteleri. Tailwind CSS ve minimal tasarım anlayışıyla geliştirildi.",
+      "tags": ["Tailwind", "Responsive", "Animation", "Portfolio"],
+      "image": "assets/web.png",
+      "detailImages": [
+        { "src": "assets/projects/modern-showcase1.png", "caption": "💼 Portföy Siteleri — kişisel vitrin tasarımı" },
+        { "src": "assets/projects/modern-showcase2.png", "caption": "🏢 Kurumsal Siteler — markanıza özel prestijli görünüm" },
+        { "src": "assets/projects/modern-showcase3.png", "caption": "🎉 Etkinlik ve kampanya sayfaları — dinamik animasyonlarla öne çıkın" }
+      ],
+      "page": "./modern-web.html"
     }
   ]
 }

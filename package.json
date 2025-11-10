@@ -1,0 +1,27 @@
+{
+  "name": "haluk-portfolio-pro-v2",
+  "version": "1.0.0",
+  "description": "- Tema geçişi localStorage ile hatırlanır. - Dil (TR/EN) `data/lang.json` ile yönetilir. - CV `assets/cv.pdf` altında; indir/aç bağlantıları hazır. - Projeler `data/projects.json` dosyasından yüklenir.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hse38/haluk-portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hse38/haluk-portfolio/issues"
+  },
+  "homepage": "https://github.com/Hse38/haluk-portfolio#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "openai": "^6.8.1"
+  }
+}

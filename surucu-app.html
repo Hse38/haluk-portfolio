@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sürücü Kursu Uygulaması | Haluk Şakir Ekinci</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/site.css" />
+  <style>
+    body {
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(255,255,255,0.1);
+    }
+
+    .app-box {
+      width: 20rem;
+      height: 38rem;
+      border-radius: 2.2rem;
+      background: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(20,20,30,0.95));
+      box-shadow: 0 0 20px rgba(109,93,246,0.2), inset 0 0 10px rgba(255,255,255,0.1);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+
+    .app-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 2.2rem;
+      background: radial-gradient(circle at 50% 0%, rgba(109,93,246,0.15), transparent 70%);
+      z-index: 0;
+    }
+
+    #app-screen {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: 2.2rem;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+
+<body class="relative min-h-screen flex flex-col items-center">
+
+  <!-- HEADER (yükleniyor) -->
+  <div id="header"></div>
+
+  <!-- ÜRÜN TANITIM ALANI -->
+  <section class="text-center py-20 bg-gradient-to-b from-gray-900/60 to-transparent w-full border-b border-gray-800">
+    <h1 class="text-4xl font-bold mb-3">🚘 Sürücü Kursu Uygulaması</h1>
+    <p class="text-gray-400 max-w-3xl mx-auto text-lg">
+      Öğrencilerin ders, eğitmen ve sınav süreçlerini tek uygulamada yöneten interaktif eğitim platformu.
+    </p>
+
+    <div class="flex justify-center gap-3 mt-6">
+      <span class="px-3 py-1 text-sm bg-cyan-500/20 text-cyan-400 rounded-full">Flutter</span>
+      <span class="px-3 py-1 text-sm bg-indigo-500/20 text-indigo-400 rounded-full">Tailwind</span>
+      <span class="px-3 py-1 text-sm bg-amber-500/20 text-amber-400 rounded-full">Simulation</span>
+    </div>
+  </section>
+
+  <!-- ANA DEMO GÖRÜNÜMÜ -->
+  <main class="flex-grow flex items-center justify-center py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto items-center px-6 z-10">
+      
+      <!-- Sol -->
+      <div class="flex flex-col gap-6">
+        <div class="card">
+          <h3 class="text-orange-400 font-semibold mb-1">🕐 Ders Saati Seçimi</h3>
+          <p class="text-gray-300 text-sm">
+            Öğrenci uygulamadan müsait saatleri görür, uygun zamanı tek dokunuşla rezerve eder.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="text-sky-400 font-semibold mb-1">👩‍🏫 Eğitmen Seçimi</h3>
+          <p class="text-gray-300 text-sm">
+            Tercih edilen eğitmen listeden seçilir, ders otomatik olarak eşleştirilir.
+          </p>
+        </div>
+      </div>
+
+      <!-- Orta (Uygulama kutusu) -->
+      <div class="relative flex justify-center">
+        <div class="app-box">
+          <div id="app-screen" class="p-4 text-center text-white">
+            <!-- JS burada uygulamayı yükleyecek -->
+          </div>
+        </div>
+        <h2 class="absolute -bottom-10 text-center w-full text-xl font-semibold text-white/70">
+          Mobil Uygulama Görünümü
+        </h2>
+      </div>
+
+      <!-- Sağ -->
+      <div class="flex flex-col gap-6">
+        <div class="card">
+          <h3 class="text-green-400 font-semibold mb-1">📍 Sınav Haritası</h3>
+          <p class="text-gray-300 text-sm">
+            Gerçek güzergâh haritası üzerinde simülasyonla rota öğrenimi.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="text-purple-400 font-semibold mb-1">📘 Çıkmış Sorular</h3>
+          <p class="text-gray-300 text-sm">
+            Kullanıcı geçmiş sınavlardan test çözebilir, sonuç analizini görebilir.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-center py-10 text-gray-400 bg-gray-950 border-t border-gray-800 w-full">
+    <a href="projects.html" class="text-orange-400 hover:underline">← Tüm Projeler</a>
+  </footer>
+
+  <!-- HEADER YÜKLEME -->
+  <script>
+    fetch("partials/header.html")
+      .then(r => r.text())
+      .then(h => (document.getElementById("header").innerHTML = h));
+  </script>
+
+  <!-- UYGULAMA JS -->
+  <script src="js/surucu-demo.js"></script>
+  <script src="js/surucu-effects.js"></script>
+</body>
+</html>
