@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Can Hukuk Bürosu | Av. Adem Can</title>
+
+  <link rel="icon" type="image/png" href="img/favicon.jpg" />
+  <link rel="apple-touch-icon" href="img/favicon.jpg" />
+
+  <!-- TAILWIND -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background-color: #050508;
+      color: #f9fafb;
+      font-family: Inter, sans-serif;
+    }
+
+    .section { padding-top: 6rem; padding-bottom: 6rem; }
+
+    .gold-gradient {
+      background: radial-gradient(circle at top, #facc6b 0, #a16207 35%, #020617 80%);
+    }
+
+    .glass {
+      background: linear-gradient(to bottom right,
+        rgba(15,23,42,0.9),
+        rgba(15,23,42,0.7)
+      );
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(148,163,184,0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-xl">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-3">
+      <img src="img/logo.png" class="w-10 h-10 rounded-full object-cover" alt="Can Hukuk Bürosu Logo">
+      <div>
+        <p class="font-semibold tracking-wide text-sm md:text-base">CAN HUKUK BÜROSU</p>
+        <p class="text-[11px] md:text-xs text-slate-300">Av. Adem Can | Kayseri</p>
+      </div>
+    </a>
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex items-center gap-6 text-sm">
+      <a href="#about" class="hover:text-amber-400 transition">Hakkımızda</a>
+      <a href="#practice" class="hover:text-amber-400 transition">Uzmanlık Alanları</a>
+      <a href="#process" class="hover:text-amber-400 transition">Süreç</a>
+      <a href="#faq" class="hover:text-amber-400 transition">SSS</a>
+      <a href="#blog" class="hover:text-amber-400 transition">Blog</a>
+      <a href="#contact" class="hover:text-amber-400 transition">İletişim</a>
+    </nav>
+
+    <!-- Buttons -->
+    <div class="hidden md:flex items-center gap-3">
+      <a href="tel:+900000000000" class="text-xs text-slate-300 hover:text-amber-400 transition">
+        Telefon: +90 (000) 000 00 00
+      </a>
+      <a href="https://wa.me/900000000000"
+         class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium bg-gradient-to-r from-amber-500 to-amber-700 text-slate-900 shadow-lg shadow-amber-500/30 hover:from-amber-400 hover:to-amber-600 transition">
+        ⚖️ Hızlı İletişim
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobileToggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-slate-500/60">
+      <div class="space-y-1.5">
+        <span class="block w-5 h-[2px] bg-slate-100"></span>
+        <span class="block w-5 h-[2px] bg-slate-100"></span>
+        <span class="block w-5 h-[2px] bg-slate-100"></span>
+      </div>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <nav id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-all duration-300 bg-black/90 border-t border-white/5">
+    <div class="px-4 py-3 flex flex-col gap-3 text-sm">
+      <a href="#about" class="hover:text-amber-400 transition">Hakkımızda</a>
+      <a href="#practice" class="hover:text-amber-400 transition">Uzmanlık Alanları</a>
+      <a href="#process" class="hover:text-amber-400 transition">Süreç</a>
+      <a href="#faq" class="hover:text-amber-400 transition">SSS</a>
+      <a href="#blog" class="hover:text-amber-400 transition">Blog</a>
+      <a href="#contact" class="hover:text-amber-400 transition">İletişim</a>
+
+      <a href="https://wa.me/900000000000"
+         class="mt-2 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-xs font-medium bg-gradient-to-r from-amber-500 to-amber-700 text-slate-900">
+        ⚖️ WhatsApp ile Hızlı İletişim
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="hero" class="section pt-28 gold-gradient">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
+
+    <div class="flex-1 space-y-5">
+      <p class="text-xs tracking-[0.35em] uppercase text-amber-200/80">CAN HUKUK BÜROSU</p>
+
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+        Adalet için
+        <span class="text-amber-300">kararlı, disiplinli</span>
+        ve
+        <span class="text-amber-100">tecrübeli</span>
+        temsil.
+      </h1>
+
+      <p class="text-sm md:text-base text-slate-100/90 max-w-xl">
+        Av. Adem Can liderliğindeki Can Hukuk Bürosu, geniş yelpazede uzmanlık alanlarıyla müvekkillerini titizlikle temsil eder.
+      </p>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <a href="https://wa.me/900000000000"
+           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-slate-900/90 text-amber-300 border border-amber-300/50 shadow-lg shadow-black/40 hover:bg-slate-900 transition">
+          ⚖️ WhatsApp ile Hızlı İletişim
+        </a>
+
+        <a href="#practice"
+           class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs md:text-sm font-medium bg-white/10 text-slate-900 bg-gradient-to-r from-amber-100 to-amber-300 hover:from-amber-50 hover:to-amber-200 border border-white/40">
+          Uzmanlık Alanlarımızı Gör
+        </a>
+      </div>
+    </div>
+
+    <div class="relative h-full flex flex-col justify-between">
+  
+      <!-- Üst Yazı -->
+      <div>
+        <p class="text-xs tracking-[0.3em] uppercase text-amber-200/80 mb-3">
+          JUSTITIA
+        </p>
+        <h2 class="text-xl font-semibold mb-2">Adalet Terazisi</h2>
+        <p class="text-xs text-slate-200/80">
+          Her dosyada dengeli, ölçülü ve hukuka uygun temsil.
+        </p>
+      </div>
+
+      <!-- İKON (Yeni eklenen kısım) -->
+      <div class="mt-6 flex justify-center">
+        <img src="img/terazi.png"
+             alt="Adalet Terazisi"
+             class="w-32 opacity-90 drop-shadow-[0_0_25px_rgba(251,191,36,0.35)]">
+      </div>
+
+      <!-- Alt metin -->
+      <div class="text-[11px] text-slate-300/90 border-t border-slate-600/60 pt-3 mt-3">
+        “Adaletin gecikmemesi için, dosyalarınızı planlı ve sistematik şekilde yönetiyoruz.”
+      </div>
+
+    </div>
+
+
+  </div>
+</section>
+
+<!-- HAKKIMIZDA -->
+<section id="about" class="section bg-slate-950">
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-start">
+    <div>
+      <p class="text-xs tracking-[0.35em] uppercase text-amber-400 mb-2">HAKKIMIZDA</p>
+      <div class="glass rounded-2xl overflow-hidden">
+        <img src="img/ademcan.png" alt="Av. Adem Can"
+          class="w-full h-auto object-contain bg-slate-900 p-2">
+      </div>
+
+
+      <h2 class="text-2xl md:text-3xl font-semibold mb-4">
+        Disiplinli, planlı ve müvekkil odaklı temsil.
+      </h2>
+
+      <p class="text-sm md:text-base text-slate-300 leading-relaxed mb-4">
+        Can Hukuk Bürosu, Av. Adem Can tarafından kurulmuş; ceza, aile, iş, ticaret,
+        icra–iflas, gayrimenkul ve bilişim hukuku alanlarında danışmanlık veren bir hukuk bürosudur.
+      </p>
+    </div>
+
+    <div class="grid gap-4">
+      <div class="glass rounded-2xl p-4 md:p-5">
+        <p class="text-xs text-amber-300 mb-1">Misyon</p>
+        <p class="text-sm text-slate-100">
+          Müvekkillerimizin haklarını etkin şekilde savunmak.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UZMANLIK ALANLARI -->
+<section id="practice" class="section bg-slate-900">
+  <div class="max-w-6xl mx-auto px-4 text-center mb-12">
+    <p class="text-xs tracking-[0.3em] uppercase text-amber-300 mb-2">UZMANLIK ALANLARI</p>
+    <h2 class="text-2xl md:text-3xl font-semibold">Hukuki Çözümlerimiz</h2>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-6">
+    <!-- Kart 1 -->
+    <div class="glass p-6 rounded-2xl hover:-translate-y-2 transition shadow-lg">
+      <h3 class="text-lg font-semibold mb-2 text-amber-300">Ceza Hukuku</h3>
+      <p class="text-sm text-slate-300">Ceza davalarında tecrübe, strateji ve etkili savunma.</p>
+    </div>
+
+    <!-- Kart 2 -->
+    <div class="glass p-6 rounded-2xl hover:-translate-y-2 transition shadow-lg">
+      <h3 class="text-lg font-semibold mb-2 text-amber-300">Aile Hukuku</h3>
+      <p class="text-sm text-slate-300">Boşanma, velayet, nafaka ve aile içi uyuşmazlık çözümleri.</p>
+    </div>
+
+    <!-- Kart 3 -->
+    <div class="glass p-6 rounded-2xl hover:-translate-y-2 transition shadow-lg">
+      <h3 class="text-lg font-semibold mb-2 text-amber-300">İş Hukuku</h3>
+      <p class="text-sm text-slate-300">İşçi-işveren uyuşmazlıkları, tazminat ve hak talepleri.</p>
+    </div>
+
+    <!-- Kart 4 -->
+    <div class="glass p-6 rounded-2xl hover:-translate-y-2 transition shadow-lg">
+      <h3 class="text-lg font-semibold mb-2 text-amber-300">Ticaret Hukuku</h3>
+      <p class="text-sm text-slate-300">Şirket danışmanlığı, sözleşmeler ve ticari ihtilaflar.</p>
+    </div>
+
+    <!-- Kart 5 -->
+    <div class="glass p-6 rounded-2xl hover:-translate-y-2 transition shadow-lg">
+      <h3 class="text-lg font-semibold mb-2 text-amber-300">İcra & İflas Hukuku</h3>
+      <p class="text-sm text-slate-300">Takip, haciz, borç yapılandırma ve itiraz süreçleri.</p>
+    </div>
+
+    <!-- Kart 6 -->
+    <div class="glass p-6 rounded-2xl hover:-translate-y-2 transition shadow-lg">
+      <h3 class="text-lg font-semibold mb-2 text-amber-300">Bilişim Hukuku</h3>
+      <p class="text-sm text-slate-300">Dijital suçlar, sosyal medya ihtilafları ve KVKK süreçleri.</p>
+    </div>
+  </div>
+</section>
+
+<!-- İLETİŞİM -->
+<section id="contact" class="section bg-slate-900">
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+
+    <div>
+      <p class="text-xs tracking-[0.35em] uppercase text-amber-400 mb-2">İLETİŞİM</p>
+      <h2 class="text-2xl md:text-3xl font-semibold mb-4">Bizimle iletişime geçin</h2>
+      <div class="glass rounded-2xl p-6 mt-6">
+        <p class="text-xs text-amber-300 mb-3">Hızlı Mesaj Gönder</p>
+
+        <form class="space-y-4">
+          <input type="text" placeholder="Adınız Soyadınız"
+                 class="w-full px-4 py-2 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-amber-400 outline-none">
+
+          <input type="email" placeholder="E-posta"
+                 class="w-full px-4 py-2 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 focus:border-amber-400 outline-none">
+
+          <textarea placeholder="Mesajınız"
+                    class="w-full px-4 py-2 rounded-lg bg-slate-800 text-slate-100 border border-slate-700 h-28 focus:border-amber-400 outline-none"></textarea>
+
+          <button class="w-full py-2.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-700 font-medium text-slate-900 hover:opacity-90 transition">
+            Gönder
+          </button>
+        </form>
+      </div>
+
+
+      <div class="space-y-3 text-sm text-slate-100">
+        <div>
+          <p class="text-xs text-slate-400">Telefon</p>
+          <a href="tel:+900000000000" class="hover:text-amber-300 transition">
+            +90 (000) 000 00 00
+          </a>
+        </div>
+
+        <div>
+          <p class="text-xs text-slate-400">E-posta</p>
+          <a href="mailto:info@canhukuk.com" class="hover:text-amber-300 transition">
+            info@canhukuk.com
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-lg shadow-black/40">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3479.487083791908!2d35.35784187743645!3d38.09689908791404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1str!2str!4v1763042603332!5m2!1str!2str"
+        width="100%" 
+        height="100%" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-slate-800 bg-slate-950">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[11px] text-slate-400">
+    <p>© <span id="year"></span> Can Hukuk Bürosu | Tüm hakları saklıdır.</p>
+    <p>Bu site bilgilendirme amaçlıdır; hukuki danışmanlık değildir.</p>
+  </div>
+</footer>
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/900000000000"
+   class="fixed bottom-6 right-6 z-40 inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 text-slate-900 text-3xl shadow-[0_0_25px_rgba(251,191,36,0.8)] hover:scale-110 transition">
+  ⚖️
+</a>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const mobileToggle = document.getElementById("mobileToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  mobileToggle.addEventListener("click", () => {
+    if (mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== "0px") {
+      mobileMenu.style.maxHeight = "0px";
+    } else {
+      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+    }
+  });
+  
+</script>
+
+</body>
+</html>
