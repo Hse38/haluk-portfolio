@@ -1,12 +1,14 @@
 {
   "cleanUrls": true,
+  "outputDirectory": "Public",
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
+    
     { "source": "/projects", "destination": "/projects.html" },
     { "source": "/blog", "destination": "/blog.html" },
     { "source": "/contact", "destination": "/contact.html" },
 
-    { "source": "/canhukuk", "destination": "/public/canhukuk/index.html" },
-    { "source": "/canhukuk/(.*)", "destination": "/public/canhukuk/$1" }
+    { "source": "/canhukuk", "destination": "/canhukuk/index.html" },
+    { "source": "/canhukuk/(.*)", "destination": "/canhukuk/$1" }
   ]
 }
