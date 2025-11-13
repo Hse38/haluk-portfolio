@@ -4,6 +4,9 @@
     { "source": "/", "destination": "/index.html" },
     { "source": "/projects", "destination": "/projects.html" },
     { "source": "/blog", "destination": "/blog.html" },
-    { "source": "/contact", "destination": "/contact.html" }
+    { "source": "/contact", "destination": "/contact.html" },
+
+    { "source": "/canhukuk", "destination": "/public/canhukuk/index.html" },
+    { "source": "/canhukuk/(.*)", "destination": "/public/canhukuk/$1" }
   ]
 }
